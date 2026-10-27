@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Franco Barra · CFO Fraccionado & Power BI</title>
+<meta name="description" content="Control de gestión, Power BI ejecutivo y CFO fraccionado con ciencia de datos para PyMEs que crecen rápido. Franco Barra, CPA.">
+<meta property="og:title" content="Franco Barra — Strategic Data Driven">
+<meta property="og:image" content="brand%20images/Marca%20Personal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A0F2E;
+  --ink:#151C47;
+  --ink-2:#1E2759;
+  --silver:#B9BFD3;
+  --silver-dim:#7F87A6;
+  --mist:#EEF0F6;
+  --paper:#FFFFFF;
+  --text-dark:#141A3A;
+  --text-mute:#525A7A;
+  --signal:#FFB547;   /* leaks, alerts */
+  --flow:#7CB7FF;     /* truth line, healthy cash */
+  --violet:#B79CFF;
+  --line:rgba(185,191,211,.18);
+  --line-dark:rgba(20,26,58,.12);
+  --radius-s:6px;
+  --radius-m:14px;
+  --wrap:1180px;
+  --gutter:clamp(16px,4vw,40px);
+  --f-sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-serif:"Lora",Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--navy);color:var(--silver);font-family:var(--f-sans);font-size:18px;line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--flow);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---------- type scale ---------- */
+h1,h2,h3{font-weight:300;letter-spacing:-.01em;margin:0;color:#fff}
+h1{font-size:clamp(2.25rem,5.4vw,4.4rem);line-height:1.04}
+h2{font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.1}
+h3{font-size:1.375rem;line-height:1.25;font-weight:400}
+p{margin:0 0 1em}
+.lede{font-size:clamp(1.05rem,1.5vw,1.25rem);max-width:56ch;color:var(--silver)}
+.voice{font-family:var(--f-serif);font-style:italic;font-weight:400}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.6em;border:0;cursor:pointer;text-decoration:none;font-weight:500;font-size:1rem;padding:.9em 1.5em;border-radius:999px;transition:background .2s,color .2s,transform .2s}
+.btn-primary{background:var(--flow);color:var(--navy)}
+.btn-primary:hover{background:#fff}
+.btn-ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1px #fff}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--ink-2)}
+.btn:active{transform:translateY(1px)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:40;background:var(--navy);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.scrolled{border-bottom-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+.brand{display:block;width:160px;height:44px;overflow:hidden;position:relative;isolation:auto;flex:none}
+.brand img{position:absolute;max-width:none;width:412px;height:auto;left:-245px;top:-22px;filter:invert(1);mix-blend-mode:screen}
+.nav-links{display:flex;gap:28px;align-items:center;list-style:none;margin:0;padding:0}
+.nav-links a{text-decoration:none;font-size:.95rem;color:var(--silver);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{padding:.6em 1.15em;font-size:.92rem}
+.nav-links a.btn-primary{color:var(--navy)}
+.nav-links a.btn-primary:hover{color:var(--navy)}
+.menu-btn{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;padding:10px}
+.menu-btn span{display:block;height:1.5px;background:#fff;margin:6px 0;transition:transform .25s,opacity .25s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:clamp(48px,8vw,96px) 0 clamp(56px,7vw,88px)}
+.hero-waves{position:absolute;inset:-8% -4% auto -4%;width:108%;max-width:none;clip-path:inset(9% 0 0 0);filter:invert(1);mix-blend-mode:screen;opacity:.32;pointer-events:none}
+.hero-copy{position:relative;max-width:900px}
+.hero h1 .h1-sub{display:block;color:var(--silver);font-size:.56em;line-height:1.2;margin-top:.45em}
+.hero .lede{margin-top:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center}
+.hero-cred{font-size:.9rem;color:var(--silver-dim);margin-left:6px}
+
+.pipe{position:relative;margin-top:clamp(48px,7vw,80px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center}
+.pipe-field{position:relative;height:340px}
+.pipe-field svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.strand{fill:none;stroke:var(--silver);stroke-width:1;vector-effect:non-scaling-stroke;opacity:.38;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.6,.05,.2,1)}
+.strand.lead{stroke:var(--flow);opacity:.9;stroke-width:1.5}
+.strand.lead.leak{stroke:var(--signal)}
+.pipe.go .strand{stroke-dashoffset:0}
+.src{position:absolute;left:0;transform:translateY(-50%);font-size:.85rem;color:#fff;background:var(--navy);padding:4px 12px 4px 0;white-space:nowrap;opacity:0;transition:opacity .6s}
+.src small{display:block;color:var(--silver-dim);font-size:.75rem;line-height:1.2}
+.src.leak{color:var(--signal)}
+.pipe.go .src{opacity:1}
+
+.dash{position:relative;background:linear-gradient(160deg,rgba(30,39,89,.85),rgba(21,28,71,.92));border:1px solid rgba(124,183,255,.28);border-radius:var(--radius-m);padding:22px 22px 18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 30px 80px -30px rgba(0,0,0,.7);opacity:0;transform:translateX(16px);transition:opacity .8s 1.2s,transform .8s 1.2s}
+.pipe.go .dash{opacity:1;transform:none}
+.dash::before{content:"";position:absolute;left:-6px;top:50%;width:11px;height:11px;border-radius:50%;background:var(--flow);box-shadow:0 0 0 6px rgba(124,183,255,.18),0 0 24px var(--flow);transform:translateY(-50%)}
+.dash-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.85rem;color:var(--silver-dim)}
+.live{display:inline-flex;align-items:center;gap:6px;color:var(--flow)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--flow);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.dash-big{font-size:clamp(2rem,3.4vw,2.6rem);color:#fff;font-weight:300;line-height:1.1;margin:10px 0 2px}
+.dash-delta{font-size:.85rem;color:var(--flow)}
+.dash svg{width:100%;height:110px;display:block;margin:14px 0 10px}
+.dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.dash-kpis div{font-size:.78rem;color:var(--silver-dim);line-height:1.3}
+.dash-kpis b{display:block;font-weight:400;font-size:1.15rem;color:#fff}
+.dash-kpis .alert b{color:var(--signal)}
+.dash-note{font-size:.72rem;color:var(--silver-dim);margin-top:12px}
+
+/* ---------- section shells ---------- */
+.sec{padding:clamp(72px,10vw,128px) 0}
+.sec-light{background:var(--paper);color:var(--text-mute)}
+.sec-light h2,.sec-light h3{color:var(--text-dark)}
+.sec-mist{background:var(--mist);color:var(--text-mute)}
+.sec-mist h2,.sec-mist h3{color:var(--text-dark)}
+.sec-ink{background:var(--ink)}
+.sec-head{max-width:760px;margin-bottom:clamp(40px,5vw,64px)}
+.sec-head p{margin-top:18px}
+
+/* ---------- pain ---------- */
+.pain-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.frictions{list-style:none;margin:0;padding:0;border-top:1px solid var(--line-dark)}
+.frictions li{padding:20px 0;border-bottom:1px solid var(--line-dark);display:grid;grid-template-columns:28px 1fr;gap:10px}
+.frictions svg{width:20px;height:20px;margin-top:5px;color:#C77F00}
+.frictions b{display:block;color:var(--text-dark);font-weight:500;font-size:1.1rem}
+.frictions span{font-size:1rem}
+
+.sim{background:var(--navy);color:var(--silver);border-radius:var(--radius-m);padding:clamp(22px,3vw,36px);position:relative;overflow:hidden}
+.sim h3{color:#fff;margin-bottom:6px}
+.sim > p{font-size:.95rem;color:var(--silver-dim)}
+.ctrl{margin:22px 0}
+.ctrl-top{display:flex;justify-content:space-between;gap:12px;font-size:.95rem;margin-bottom:8px}
+.ctrl-top output{color:#fff;font-weight:500}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;min-width:0;display:block;height:28px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(90deg,var(--flow) var(--p,50%),rgba(185,191,211,.22) var(--p,50%))}
+input[type=range]::-moz-range-track{height:3px;border-radius:3px;background:rgba(185,191,211,.22)}
+input[type=range]::-moz-range-progress{height:3px;background:var(--flow)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;margin-top:-8.5px;box-shadow:0 0 0 5px rgba(124,183,255,.25)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border:0;border-radius:50%;background:#fff;box-shadow:0 0 0 5px rgba(124,183,255,.25)}
+.sim .leak-range::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--signal) var(--p,50%),rgba(185,191,211,.22) var(--p,50%))}
+.sim .leak-range::-moz-range-progress{background:var(--signal)}
+.ledger{margin-top:28px;border-top:1px solid var(--line)}
+.ledger-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.98rem}
+.ledger-row b{font-weight:400;color:#fff;font-size:1.25rem;white-space:nowrap}
+.ledger-row.hot b{color:var(--signal);font-size:1.6rem}
+.sim-foot{font-size:.8rem;color:var(--silver-dim);margin-top:14px}
+
+/* ---------- services ---------- */
+.svc-list{border-top:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr) auto;gap:clamp(18px,3vw,48px);align-items:start;padding:clamp(28px,3.5vw,44px) 0;border-bottom:1px solid var(--line);position:relative}
+.svc::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--flow);transition:width .5s ease}
+.svc:hover::before,.svc:focus-within::before{width:100%}
+.svc h3{font-size:clamp(1.35rem,2.2vw,1.75rem);font-weight:300}
+.svc-format{display:block;font-size:.88rem;color:var(--silver-dim);margin-top:10px}
+.svc-quote{color:#fff;font-size:1.1rem;margin:0 0 10px}
+.svc p.svc-detail{font-size:.98rem;margin:0}
+.svc .btn{white-space:nowrap}
+.svc-feature{font-size:.92rem;color:var(--silver-dim);margin-top:40px;max-width:70ch}
+.svc-feature b{color:#fff;font-weight:500}
+
+/* ---------- modal ---------- */
+dialog.modal{border:0;padding:0;max-width:640px;width:calc(100% - 32px);border-radius:var(--radius-m);background:var(--paper);color:var(--text-mute);box-shadow:0 40px 120px rgba(0,0,0,.55)}
+dialog.modal::backdrop{background:rgba(6,9,30,.72);backdrop-filter:blur(4px)}
+dialog.modal[open]{animation:pop .28s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.modal-head{background:var(--navy) url("brand%20images/Para%20Presentaci%C3%B3n.png") right -40px top -30px/560px auto no-repeat;background-blend-mode:normal;padding:28px 28px 24px;position:relative;color:var(--silver)}
+.modal-head::after{content:"";position:absolute;inset:0;background:var(--navy);mix-blend-mode:multiply;pointer-events:none}
+.modal-head > *{position:relative;z-index:1}
+.modal-head h3{color:#fff;font-size:1.6rem;font-weight:300;max-width:26ch}
+.modal-head p{margin:8px 0 0;font-size:.95rem}
+.modal-body{padding:24px 28px 28px}
+.modal-body h4{margin:0 0 10px;color:var(--text-dark);font-weight:500;font-size:1rem}
+.modal-body ul{margin:0 0 22px;padding-left:1.1em}
+.modal-body li{margin-bottom:6px;font-size:.98rem}
+.modal-body li::marker{color:var(--flow)}
+.modal-close{position:absolute;top:14px;right:14px;z-index:2;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.1);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+.modal-close:hover{background:rgba(255,255,255,.2)}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- demo ---------- */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line-dark);margin-bottom:28px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;padding:14px 18px;cursor:pointer;color:var(--text-mute);font-size:1rem;position:relative;white-space:nowrap}
+.tab::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--navy);transform:scaleX(0);transition:transform .25s}
+.tab[aria-selected="true"]{color:var(--text-dark);font-weight:500}
+.tab[aria-selected="true"]::after{transform:scaleX(1)}
+.tab:hover{color:var(--text-dark)}
+.panel{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.panel[hidden]{display:none}
+.board{background:var(--navy);border-radius:var(--radius-m);padding:clamp(16px,2.4vw,26px);color:var(--silver);min-width:0}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.board-head strong{color:#fff;font-weight:400;font-size:1.05rem}
+.board-head span{font-size:.8rem;color:var(--silver-dim)}
+.chart{width:100%;height:auto;display:block}
+.chart text{font-family:var(--f-sans);font-size:11px;fill:var(--silver-dim)}
+.chart .grid{stroke:rgba(185,191,211,.12);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.82rem;margin-top:10px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.side h3{margin-bottom:10px}
+.side p{font-size:1rem}
+.side .ctrl-top output{color:var(--text-dark)}
+.side .ctrl-top{color:var(--text-mute)}
+.side input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--navy) var(--p,50%),rgba(20,26,58,.15) var(--p,50%))}
+.side input[type=range]::-moz-range-track{background:rgba(20,26,58,.15)}
+.side input[type=range]::-moz-range-progress{background:var(--navy)}
+.side input[type=range]::-webkit-slider-thumb{background:var(--navy);box-shadow:0 0 0 5px rgba(20,26,58,.12)}
+.side input[type=range]::-moz-range-thumb{background:var(--navy);box-shadow:0 0 0 5px rgba(20,26,58,.12)}
+.verdict{border-left:3px solid var(--flow);padding:10px 0 10px 16px;margin-top:20px;color:var(--text-dark);font-size:1rem}
+.verdict.warn{border-left-color:var(--signal)}
+.seg{display:inline-flex;background:var(--mist);border-radius:999px;padding:4px;gap:2px;margin:6px 0 14px}
+.seg button{border:0;background:none;padding:.45em 1em;border-radius:999px;cursor:pointer;font-size:.9rem;color:var(--text-mute)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip-toggle{border:1px solid var(--line-dark);background:#fff;border-radius:999px;padding:.4em .9em .4em .7em;font-size:.88rem;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--text-dark)}
+.chip-toggle i{width:10px;height:10px;border-radius:50%}
+.chip-toggle[aria-pressed="false"]{opacity:.45;text-decoration:line-through}
+.dot{cursor:pointer;transition:r .15s,opacity .2s}
+.dot:hover{r:6}
+.cluster-info{min-height:4.8em}
+
+.impact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:clamp(56px,7vw,88px);border-top:1px solid var(--line-dark)}
+.impact > div{padding:26px 24px 6px 0}
+.impact > div + div{padding-left:24px;border-left:1px solid var(--line-dark)}
+.impact b{display:block;font-weight:300;color:var(--text-dark);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;margin-bottom:8px}
+.impact span{font-size:.98rem}
+
+/* ---------- about ---------- */
+.about{position:relative;overflow:hidden}
+.about-waves{position:absolute;right:-6%;bottom:-6%;width:70%;max-width:none;opacity:.9;clip-path:inset(20% 0 0 0);pointer-events:none}
+.about-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(32px,6vw,88px)}
+.about blockquote{margin:0 0 28px;font-family:var(--f-serif);font-style:italic;font-size:clamp(1.3rem,2.2vw,1.65rem);line-height:1.45;color:var(--text-dark);max-width:34ch}
+.about p{max-width:60ch}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.stack span{border:1px solid var(--line-dark);border-radius:999px;padding:.35em .95em;font-size:.92rem;color:var(--text-dark);background:rgba(255,255,255,.75)}
+.stack span.cert{background:var(--navy);color:#fff;border-color:var(--navy)}
+.career h3{font-size:1.1rem;font-weight:500;margin-bottom:6px}
+.career > p{font-size:.92rem;margin-bottom:18px}
+.career ol{list-style:none;margin:0;padding:0;position:relative}
+.career ol::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:var(--line-dark)}
+.career li{position:relative;padding:12px 0 12px 30px;font-size:1.05rem;color:var(--text-dark)}
+.career li::before{content:"";position:absolute;left:0;top:50%;width:11px;height:11px;border-radius:50%;background:#fff;border:1.5px solid var(--silver-dim);transform:translateY(-50%)}
+.career li:first-child::before{background:var(--navy);border-color:var(--navy)}
+.career li small{display:block;color:var(--text-mute);font-size:.86rem}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:start}
+.contact-side p{max-width:42ch}
+.contact-side ul{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+.contact-side li{padding:14px 0;border-bottom:1px solid var(--line);font-size:.98rem}
+.contact-side li b{color:#fff;font-weight:500;display:block}
+form.audit{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius-m);padding:clamp(20px,3vw,34px)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{margin-bottom:18px}
+.field label,.field legend{display:block;font-size:.92rem;color:#fff;margin-bottom:7px;padding:0}
+.field label small{color:var(--silver-dim)}
+.field input,.field select,.field textarea{width:100%;background:rgba(10,15,46,.65);border:1px solid rgba(185,191,211,.28);border-radius:var(--radius-s);padding:.75em .9em;color:#fff;font-size:1rem;transition:border-color .2s}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B9BFD3' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:2.4em}
+.field select option{background:var(--navy)}
+.field textarea{min-height:96px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--silver-dim)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--flow)}
+.field.err input,.field.err select,.field.err textarea{border-color:var(--signal)}
+.err-msg{display:none;font-size:.85rem;color:var(--signal);margin-top:6px}
+.field.err .err-msg{display:block}
+fieldset.field{border:0;margin:0 0 18px;padding:0}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.picks label{margin:0;cursor:pointer;position:relative}
+.picks input{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+.picks span{display:inline-block;border:1px solid rgba(185,191,211,.3);border-radius:999px;padding:.45em 1em;font-size:.92rem;color:var(--silver);transition:all .2s}
+.picks input:checked + span{background:var(--flow);border-color:var(--flow);color:var(--navy)}
+.picks input:focus-visible + span{outline:2px solid var(--flow);outline-offset:2px}
+.form-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:8px}
+.form-foot small{font-size:.82rem;color:var(--silver-dim);max-width:34ch}
+.done{display:none;text-align:left}
+.done h3{margin-bottom:10px}
+form.audit.sent .form-body{display:none}
+form.audit.sent .done{display:block;animation:pop .35s ease-out}
+
+/* ---------- footer ---------- */
+.foot{background:var(--navy);border-top:1px solid var(--line)}
+.foot-banner{display:block;width:100%;max-width:none;height:auto;aspect-ratio:1584/396;object-fit:cover}
+.foot-in{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;padding:22px var(--gutter) 30px;max-width:var(--wrap);margin:0 auto;font-size:.88rem;color:var(--silver-dim)}
+.foot-in a{text-decoration:none}
+.foot-in a:hover{color:#fff}
+
+/* ---------- reveal (one orchestrated moment only: hero) ---------- */
+.hero-copy > *{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-copy > :nth-child(2){animation-delay:.12s}
+.hero-copy > :nth-child(3){animation-delay:.24s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:980px){
+  .pipe{grid-template-columns:minmax(0,1fr)}
+  .pipe-field{height:250px}
+  .dash::before{left:50%;top:-6px;transform:translateX(-50%)}
+  .pain-grid,.about-grid,.contact-grid,.panel{grid-template-columns:minmax(0,1fr)}
+  .svc{grid-template-columns:minmax(0,1fr);gap:12px}
+  .about-waves{width:120%}
+}
+@media (max-width:820px){
+  .nav-links{position:fixed;inset:72px 0 auto 0;background:var(--navy);flex-direction:column;align-items:flex-start;gap:0;padding:8px var(--gutter) 24px;border-bottom:1px solid var(--line);transform:translateY(-8px);opacity:0;visibility:hidden;transition:all .25s}
+  .nav-links.open{transform:none;opacity:1;visibility:visible}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:14px 0;font-size:1.05rem;border-bottom:1px solid var(--line)}
+  .nav-links .nav-cta{display:inline-flex;margin-top:16px;border:0;padding:.75em 1.3em}
+  .menu-btn{display:block}
+  .impact{grid-template-columns:1fr}
+  .impact > div + div{padding-left:0;border-left:0;border-top:1px solid var(--line-dark)}
+  .row2{grid-template-columns:minmax(0,1fr);gap:0}
+  .src{font-size:.75rem}
+  .src small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  html{scroll-behavior:auto}
+}
+</style>
+<style>
+/* Added for the ES/EN switch and hero kicker. Original rules above are unchanged. */
+.lang{display:inline-flex;align-items:center;flex:none;font-size:.85rem;line-height:1}
+.lang button{background:none;border:0;cursor:pointer;color:var(--silver-dim);padding:8px 6px;font-weight:500;letter-spacing:.04em;transition:color .2s}
+.lang button:hover{color:#fff}
+.lang button[aria-pressed="true"]{color:#fff;box-shadow:inset 0 -1.5px 0 var(--flow)}
+.lang span{color:var(--silver-dim);opacity:.5;padding:0 2px}
+.nav-in .nav-links{margin-left:auto}
+.kicker{margin:0 0 22px;font-size:.82rem;letter-spacing:.14em;color:var(--flow);font-weight:500}
+.hero-copy > :nth-child(4){animation-delay:.36s}
+@media (max-width:820px){.lang{margin-left:auto}.nav-in .menu-btn{order:3}}
+
+/* Added: contact channels (LinkedIn, WhatsApp, email). Uses existing variables only. */
+.social{display:inline-flex;align-items:center;gap:2px;flex:none}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;color:var(--silver);transition:color .2s,background .2s}
+.social a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.social svg{width:18px;height:18px}
+.nav-social-li{display:none}
+.direct{margin-top:36px}
+.direct h3{font-size:1.1rem;font-weight:500;margin-bottom:14px}
+.direct-btns{display:flex;flex-wrap:wrap;gap:10px}
+.direct-btns .btn{padding:.75em 1.2em;font-size:.95rem}
+.direct-btns svg{width:18px;height:18px;flex:none}
+.direct-meta{margin:16px 0 0;font-size:.92rem;color:var(--silver-dim)}
+.direct-meta a{color:var(--silver);text-decoration:none}
+.direct-meta a:hover{color:#fff}
+.foot-contact{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
+.foot-contact a{display:inline-flex;align-items:center;gap:8px;color:var(--silver)}
+.foot-contact svg{width:16px;height:16px;flex:none}
+/* Added: profile photo */
+.about-photo{display:block;width:100%;max-width:340px;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;border-radius:var(--radius-m);border:1px solid var(--line-dark);background:var(--mist);margin:0 0 36px}
+@media (max-width:980px){.about-photo{max-width:280px}}
+@media (max-width:1100px){.nav-in > .social{display:none}}
+@media (max-width:820px){
+  .nav-links .nav-social-li{display:block;margin-top:14px}
+  .nav-links .social a{display:inline-flex;width:44px;height:44px;padding:0;border:0;font-size:inherit}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-li" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.6a9.4 9.4 0 0 0-8.1 14.2L2.6 21.4l4.7-1.2A9.4 9.4 0 1 0 12 2.6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path fill="currentColor" d="M8.7 7.4c.2-.3.5-.3.7-.3h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.4 0 .6.5.9 1.2 1.7 2.1 2.3.3.2.6.3.8.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.3.4.5 0 .6-.3 1.4-1 1.8-.7.4-1.6.5-2.6.1-1.4-.5-2.8-1.4-3.9-2.6-1-1.1-1.8-2.4-2.1-3.6-.3-1.1.1-2 1-2.6z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.8" y="5" width="18.4" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" data-i18n-attr="aria-label:brand.aria" aria-label="Franco Barra, inicio">
+      <img src="brand%20images/Logo%20file%20white.png" alt="Franco Barra — Strategic Data Driven">
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#dolor" data-i18n="nav.pain">El problema</a></li>
+      <li><a href="#servicios" data-i18n="nav.svc">Servicios</a></li>
+      <li><a href="#demo" data-i18n="nav.demo">Tableros</a></li>
+      <li><a href="#franco" data-i18n="nav.about">Sobre mí</a></li>
+      <li><a class="btn btn-primary nav-cta" href="#contacto" data-cta data-i18n="nav.cta">Solicitar diagnóstico</a></li>
+      <li class="nav-social-li">
+        <div class="social">
+          <a href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.li" aria-label="Perfil de LinkedIn (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-li"/></svg></a>
+          <a href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.wa" aria-label="Escribir por WhatsApp (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+          <a href="mailto:hola@francobarra.com" data-i18n-attr="aria-label:soc.mail" aria-label="Enviar un email a hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+        </div>
+      </li>
+    </ul>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.li;title:soc.liT" aria-label="Perfil de LinkedIn (se abre en otra pestaña)" title="LinkedIn"><svg aria-hidden="true"><use href="#i-li"/></svg></a>
+      <a href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.wa;title:soc.waT" aria-label="Escribir por WhatsApp (se abre en otra pestaña)" title="WhatsApp +34 622 651 407"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+      <a href="mailto:hola@francobarra.com" data-i18n-attr="aria-label:soc.mail" aria-label="Enviar un email a hola@francobarra.com" title="hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+    </div>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Español">ES</button><span aria-hidden="true">|</span><button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="h-hero">
+  <img class="hero-waves" src="brand%20images/Para%20Presentaci%C3%B3n.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="kicker">[ DATA-DRIVEN FINANCE &amp; ADVANCED ANALYTICS ]</p>
+      <h1 id="h-hero"><span data-i18n="hero.h1">Estrategia, FP&amp;A &amp; Automatismos para Directivos</span>
+        <span class="h1-sub" data-i18n="hero.sub">Conecta tu ERP con escenarios probabilísticos y descubre patrones ocultos en la rentabilidad de tus clientes.</span>
+      </h1>
+      <p class="lede" data-i18n="hero.p">Unimos la solidez financiera tradicional (CPA, US GAAP, IFRS) con Power BI y analítica predictiva para que tu PyME crezca con control absoluto de la caja.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contacto" data-cta data-i18n="hero.cta">Solicitar diagnóstico financiero gratis</a>
+        <a class="btn btn-ghost" href="#demo" data-i18n="hero.cta2">Ver tableros de ejemplo</a>
+      </div>
+    </div>
+
+    <div class="pipe" id="pipe" data-i18n-attr="aria-label:pipe.aria" aria-label="Tus fuentes de datos dispersas se consolidan en un único tablero de caja">
+      <div class="pipe-field" id="pipeField">
+        <svg id="pipeSvg" viewBox="0 0 600 320" preserveAspectRatio="none" aria-hidden="true"></svg>
+      </div>
+      <div class="dash" role="img" data-i18n-attr="aria-label:dash.aria" aria-label="Tablero ejemplo: posición de caja consolidada de USD 412.800, proyección a 13 semanas">
+        <div class="dash-top"><span data-i18n="dash.title">Posición de caja consolidada</span><span class="live"><i></i><span data-i18n="dash.live">en vivo</span></span></div>
+        <div class="dash-big num" data-i18n="dash.big">USD 412.800</div>
+        <div class="dash-delta num" data-i18n="dash.delta">+8,4% vs. mes anterior · proyección 13 semanas</div>
+        <svg viewBox="0 0 300 110" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="hg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7CB7FF" stop-opacity=".35"/><stop offset="1" stop-color="#7CB7FF" stop-opacity="0"/></linearGradient></defs>
+          <line x1="0" x2="300" y1="84" y2="84" stroke="#FFB547" stroke-dasharray="3 4" stroke-width="1" vector-effect="non-scaling-stroke" opacity=".7"/>
+          <path d="M0,62 C20,58 34,66 52,55 S86,40 104,46 S138,60 156,50 S190,30 208,36 L208,110 L0,110Z" fill="url(#hg)"/>
+          <path d="M0,62 C20,58 34,66 52,55 S86,40 104,46 S138,60 156,50 S190,30 208,36" fill="none" stroke="#7CB7FF" stroke-width="2" vector-effect="non-scaling-stroke"/>
+          <path d="M208,36 C226,42 240,58 258,66 S286,48 300,40" fill="none" stroke="#7CB7FF" stroke-width="2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke" opacity=".75"/>
+          <line x1="208" x2="208" y1="10" y2="110" stroke="rgba(185,191,211,.3)" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="dash-kpis num">
+          <div data-i18n="dash.k1"><b>47 días</b>cobro promedio</div>
+          <div data-i18n="dash.k2"><b>31,4%</b>margen bruto real</div>
+          <div class="alert" data-i18n="dash.k3"><b>3</b>alertas de margen</div>
+        </div>
+        <div class="dash-note" data-i18n="dash.note">Datos ilustrativos. La línea punteada ámbar es tu caja mínima operativa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAIN ================= -->
+<section class="sec sec-light" id="dolor" aria-labelledby="h-pain">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-pain" data-i18n="pain.h2">El crecimiento de hoy rompe tus sistemas de ayer</h2>
+      <p class="lede" style="color:var(--text-mute)" data-i18n="pain.lede"><span class="voice">“Tu PyME vende, pero no sabés dónde está la caja.”</span> Cuando la facturación sube rápido, la planilla que funcionaba con 30 clientes deja de alcanzar con 300. El margen se va por lugares que nadie mira.</p>
+    </div>
+
+    <div class="pain-grid">
+      <ul class="frictions">
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4h14l-5 7v5l-4 2v-7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <div data-i18n="pain.f1"><b>Margen que se pierde sin que lo veas</b><span>Descuentos fuera de lista, fletes absorbidos y devoluciones que nunca llegan al costo del producto.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 14c3 0 3-8 6-8s3 8 6 8 3-5 4-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div data-i18n="pain.f2"><b>Descalces de caja</b><span>Vendés a 60 días, pagás a 30. Cuanto más crecés, más capital de trabajo financiás vos.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 8h14M8 3v14" stroke="currentColor" stroke-width="1.5"/></svg>
+          <div data-i18n="pain.f3"><b>Excel desactualizado</b><span>Tres versiones del mismo reporte, cada área con su número y el cierre llega 20 días tarde.</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l2.5 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <div data-i18n="pain.f4"><b>Parálisis por análisis</b><span>Muchos datos y ninguna decisión: nadie confía en el número lo suficiente como para actuar.</span></div>
+        </li>
+      </ul>
+
+      <div class="sim" id="sim">
+        <h3 data-i18n="sim.h3">¿Cuánto te cuesta no ver?</h3>
+        <p data-i18n="sim.p">Mové los valores con los de tu empresa. El cálculo se hace en tu navegador y no se guarda.</p>
+
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="sSales" data-i18n="sim.l1">Facturación mensual</label><output id="oSales" class="num" for="sSales"></output></div>
+          <input type="range" id="sSales" min="50" max="2000" step="10" value="400">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="sDays" data-i18n="sim.l2">Días promedio de cobro</label><output id="oDays" class="num" for="sDays"></output></div>
+          <input type="range" id="sDays" min="15" max="120" step="1" value="55">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="sGrowth" data-i18n="sim.l3">Crecimiento mensual de ventas</label><output id="oGrowth" class="num" for="sGrowth"></output></div>
+          <input type="range" id="sGrowth" min="0" max="15" step="0.5" value="5">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="sLeak" data-i18n="sim.l4">Margen no imputado <small style="color:var(--silver-dim)">(descuentos, fletes, devoluciones)</small></label><output id="oLeak" class="num" for="sLeak"></output></div>
+          <input type="range" class="leak-range" id="sLeak" min="0" max="8" step="0.25" value="2.5">
+        </div>
+
+        <div class="ledger num" aria-live="polite">
+          <div class="ledger-row hot"><span data-i18n="sim.r1">Margen que se pierde por año</span><b id="rLeak"></b></div>
+          <div class="ledger-row"><span data-i18n="sim.r2">Caja inmovilizada en cuentas a cobrar</span><b id="rWc"></b></div>
+          <div class="ledger-row"><span data-i18n="sim.r3">Caja extra que tu crecimiento exige en 12 meses</span><b id="rGrow"></b></div>
+        </div>
+        <p class="sim-foot" data-i18n="sim.foot">Estimación orientativa en USD. El diagnóstico gratuito lo calcula con tus datos reales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec sec-ink" id="servicios" aria-labelledby="h-svc">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-svc" data-i18n="svc.h2">Herramientas a la carta</h2>
+      <p class="lede" data-i18n="svc.lede">Empezá por lo que más te duele. Cada servicio funciona solo y suma valor cuando se combina con los demás.</p>
+    </div>
+
+    <div class="svc-list">
+      <article class="svc">
+        <div><h3 data-i18n="svc1.t">Diagnóstico de integridad financiera y auditoría transaccional</h3><span class="svc-format" data-i18n="svc1.f">Proyecto puntual · punto de partida recomendado</span></div>
+        <div><p class="svc-quote" data-i18n="svc1.q">Detecto fugas de margen, costos ocultos y cuellos de botella en tu facturación.</p><p class="svc-detail" data-i18n="svc1.d">Reviso cada transacción, no una muestra, cruzando ventas, cobranzas y costos para encontrar dónde se escapa la plata.</p></div>
+        <button class="btn btn-ghost" data-svc="0" data-i18n="svc.more">Ver alcance</button>
+      </article>
+      <article class="svc">
+        <div><h3 data-i18n="svc2.t">One Source of Truth: Power BI ejecutivo</h3><span class="svc-format" data-i18n="svc2.f">Implementación y mantenimiento</span></div>
+        <div><p class="svc-quote" data-i18n="svc2.q">Conecto tu ERP (Tango, Bejerman, Xubio) y tus bancos en un solo tablero en vivo.</p><p class="svc-detail" data-i18n="svc2.d">Un número por indicador, actualizado solo, que dirección, comercial y finanzas leen igual.</p></div>
+        <button class="btn btn-ghost" data-svc="1" data-i18n="svc.more">Ver alcance</button>
+      </article>
+      <article class="svc">
+        <div><h3 data-i18n="svc3.t">FP&amp;A y CFO fraccionado</h3><span class="svc-format" data-i18n="svc3.f">Acompañamiento mensual</span></div>
+        <div><p class="svc-quote" data-i18n="svc3.q">Reuniones mensuales de estrategia para proyectar caja, analizar rentabilidad por cliente y planificar inversiones.</p><p class="svc-detail" data-i18n="svc3.d">Criterio de CFO senior en tu mesa directiva, sin el costo de un CFO de tiempo completo.</p></div>
+        <button class="btn btn-ghost" data-svc="2" data-i18n="svc.more">Ver alcance</button>
+      </article>
+      <article class="svc">
+        <div><h3 data-i18n="svc4.t">Agentes de IA y automatización transaccional</h3><span class="svc-format" data-i18n="svc4.f">A medida</span></div>
+        <div><p class="svc-quote" data-i18n="svc4.q">Pipelines ETL en Python y SQL, validación de facturas, recupero de mora y simulaciones en tiempo real por WhatsApp o Slack.</p><p class="svc-detail" data-i18n="svc4.d">Las tareas repetitivas de tu equipo financiero se hacen solas, con controles que avisan antes de que algo falle.</p></div>
+        <button class="btn btn-ghost" data-svc="3" data-i18n="svc.more">Ver alcance</button>
+      </article>
+      <article class="svc">
+        <div><h3 data-i18n="svc5.t">Precios Inteligentes &amp; Optimización de Margen</h3><span class="svc-format" data-i18n="svc5.f">Proyecto con revisiones periódicas</span></div>
+        <div><p class="svc-quote" data-i18n="svc5.q">Fijación de precios basada en datos que maximiza la captura de valor en el mercado protegiendo la rentabilidad de cada producto y cliente.</p><p class="svc-detail" data-i18n="svc5.d">Elasticidad de demanda por segmento, cost-plus dinámico y gobernanza de descuentos comerciales.</p></div>
+        <button class="btn btn-ghost" data-svc="4" data-i18n="svc.more">Ver alcance</button>
+      </article>
+    </div>
+    <p class="svc-feature" data-i18n="svc.feature"><b>¿No sabés por dónde empezar?</b> El diagnóstico gratuito te dice qué herramienta tiene el mayor retorno para tu empresa hoy.</p>
+  </div>
+</section>
+
+<dialog class="modal" id="svcModal" aria-labelledby="mTitle">
+  <div class="modal-head">
+    <button class="modal-close" id="mClose" data-i18n-attr="aria-label:modal.close" aria-label="Cerrar">×</button>
+    <h3 id="mTitle"></h3>
+    <p id="mSub"></p>
+  </div>
+  <div class="modal-body">
+    <h4 data-i18n="modal.get">Qué recibís</h4>
+    <ul id="mList"></ul>
+    <h4 data-i18n="modal.fit">Ideal si</h4>
+    <ul id="mFit"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-dark" id="mCta" data-i18n="modal.cta">Pedir este servicio</button>
+      <button class="btn" style="background:var(--mist);color:var(--text-dark)" id="mBack" data-i18n="modal.back">Seguir viendo</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ================= DEMO ================= -->
+<section class="sec sec-mist" id="demo" aria-labelledby="h-demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-demo" data-i18n="demo.h2">Así se ve tu empresa con un solo número</h2>
+      <p class="lede" style="color:var(--text-mute)" data-i18n="demo.lede">Tres tableros que construyo seguido. Probalos: responden igual que un Power BI en producción. Los datos son ilustrativos.</p>
+    </div>
+
+    <div class="tabs" role="tablist" data-i18n-attr="aria-label:demo.tabs" aria-label="Tableros de ejemplo">
+      <button class="tab" role="tab" id="t-cash" aria-controls="p-cash" aria-selected="true" data-i18n="tab.cash">Proyección de caja</button>
+      <button class="tab" role="tab" id="t-churn" aria-controls="p-churn" aria-selected="false" tabindex="-1" data-i18n="tab.churn">Riesgo de abandono</button>
+      <button class="tab" role="tab" id="t-clus" aria-controls="p-clus" aria-selected="false" tabindex="-1" data-i18n="tab.clus">Segmentación de clientes</button>
+    </div>
+
+    <!-- cash -->
+    <div class="panel" role="tabpanel" id="p-cash" aria-labelledby="t-cash" tabindex="0">
+      <div class="board">
+        <div class="board-head"><strong data-i18n="cash.title">Caja proyectada a 13 semanas</strong><span data-i18n="cash.unit">miles de USD</span></div>
+        <svg class="chart" id="cashChart" viewBox="0 0 640 300" role="img" data-i18n-attr="aria-label:cash.aria" aria-label="Gráfico de caja real y proyectada"></svg>
+        <div class="legend"><span><i style="background:#fff"></i><span data-i18n="cash.lg1">Real</span></span><span><i style="background:var(--flow)"></i><span data-i18n="cash.lg2">Proyección</span></span><span><i style="background:rgba(124,183,255,.3);height:8px"></i><span data-i18n="cash.lg3">Rango probable</span></span><span><i style="background:var(--signal)"></i><span data-i18n="cash.lg4">Caja mínima</span></span></div>
+      </div>
+      <div class="side">
+        <h3 data-i18n="cash.h3">¿Qué pasa si cobrás más tarde?</h3>
+        <p data-i18n="cash.p">La proyección combina ventas, plazos de cobro y pagos comprometidos. Cambiá los supuestos y mirá cuándo la caja toca el mínimo.</p>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="cDays" data-i18n="cash.l1">Días de cobro</label><output id="ocDays" class="num"></output></div>
+          <input type="range" id="cDays" min="20" max="90" step="1" value="45">
+        </div>
+        <div class="ctrl">
+          <div class="ctrl-top"><label for="cGrowth" data-i18n="cash.l2">Crecimiento mensual</label><output id="ocGrowth" class="num"></output></div>
+          <input type="range" id="cGrowth" min="0" max="12" step="0.5" value="4">
+        </div>
+        <div class="verdict" id="cashVerdict" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- churn -->
+    <div class="panel" role="tabpanel" id="p-churn" aria-labelledby="t-churn" tabindex="0" hidden>
+      <div class="board">
+        <div class="board-head"><strong data-i18n="churn.title">Clientes con mayor probabilidad de abandono</strong><span data-i18n="churn.sub">modelo de clasificación · próximos 90 días</span></div>
+        <svg class="chart" id="churnChart" viewBox="0 0 640 330" role="img" data-i18n-attr="aria-label:churn.aria" aria-label="Barras de probabilidad de abandono por cliente"></svg>
+      </div>
+      <div class="side">
+        <h3 data-i18n="churn.h3">Antes de que se vayan</h3>
+        <p data-i18n="churn.p">El modelo mira frecuencia de compra, caída de ticket y atrasos de pago. Lo ves cada lunes, con la lista de a quién llamar.</p>
+        <div class="seg" role="group" data-i18n-attr="aria-label:churn.seg" aria-label="Segmento">
+          <button aria-pressed="true" data-seg="all" data-i18n="churn.all">Todos</button>
+          <button aria-pressed="false" data-seg="may" data-i18n="churn.may">Mayoristas</button>
+          <button aria-pressed="false" data-seg="ret" data-i18n="churn.ret">Retail</button>
+        </div>
+        <div class="verdict warn" id="churnVerdict" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- clusters -->
+    <div class="panel" role="tabpanel" id="p-clus" aria-labelledby="t-clus" tabindex="0" hidden>
+      <div class="board">
+        <div class="board-head"><strong data-i18n="clus.title">Clientes por frecuencia y ticket promedio</strong><span data-i18n="clus.sub">clustering k-means · 4 grupos</span></div>
+        <svg class="chart" id="clusChart" viewBox="0 0 640 330" role="img" data-i18n-attr="aria-label:clus.aria" aria-label="Dispersión de clientes agrupados en cuatro segmentos"></svg>
+      </div>
+      <div class="side">
+        <h3 data-i18n="clus.h3">No todos los clientes valen lo mismo</h3>
+        <p data-i18n="clus.p">Tocá un punto para ver el cliente. Prendé y apagá grupos para comparar.</p>
+        <div class="chips" id="clusChips"></div>
+        <div class="verdict cluster-info" id="clusInfo" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="impact">
+      <div><b class="num">+USD 20M</b><span data-i18n="imp.1">en exportaciones respaldadas con información financiera auditable.</span></div>
+      <div><b data-i18n="imp.2t">Análisis de escenarios (what-if)</b><span data-i18n="imp.2">para decidir precios, inversiones y financiamiento con números, no con intuición.</span></div>
+      <div><b data-i18n="imp.3t">10+ años</b><span data-i18n="imp.3">de experiencia en finanzas corporativas en Argentina y España.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="sec sec-light about" id="franco" aria-labelledby="h-about">
+  <img class="about-waves" src="brand%20images/Para%20Presentaci%C3%B3n.png" alt="" aria-hidden="true">
+  <div class="wrap about-grid">
+    <div>
+      <h2 id="h-about" style="margin-bottom:28px">Franco Barra</h2>
+      <blockquote data-i18n="about.quote">Un contador que programa, o un data scientist que entiende de balances. Las dos cosas, potenciando tu negocio.</blockquote>
+      <p data-i18n="about.p1">Soy contador público (CPA) con más de 10 años de experiencia internacional en España y Argentina, y Senior Finance Manager. Soy estudiante del Máster en Data Science de la Universidad Complutense de Madrid.</p>
+      <p data-i18n="about.p2">Cierres bajo US GAAP e IFRS, líder SAP, presupuestos y reestructuraciones. Hoy llevo ese rigor a PyMEs que crecen más rápido que sus sistemas. Que necesitan la ayuda de la IA pero no tienen método.</p>
+      <div class="stack" data-i18n-attr="aria-label:about.stack" aria-label="Stack técnico y credenciales">
+        <span class="cert">Power BI (PL-300)</span>
+        <span class="cert">CPA</span>
+        <span>SQL</span>
+        <span>SAP FICO</span>
+        <span>US GAAP / IFRS</span>
+        <span>Python</span>
+        <span>Machine Learning</span>
+      </div>
+    </div>
+    <div class="career">
+      <img class="about-photo" src="brand%20images/Perfil%20FNB.png" width="899" height="899" loading="lazy"
+           alt="Franco Barra, contador público y especialista en datos financieros" data-i18n-attr="alt:about.photo"
+           onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='Perfil%20FNB.png'}else{this.style.display='none'}">
+      <h3 data-i18n="career.h3">Trayectoria</h3>
+      <p data-i18n="career.p">De la más reciente a la primera.</p>
+      <ol>
+        <li>WECOART INNOVA</li>
+        <li>Industria Lam</li>
+        <li>Samal Agro</li>
+        <li>Distech <small data-i18n="career.siglo">y Universidad Siglo 21</small></li>
+        <li>Emerson</li>
+        <li>Holcim</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sec" id="contacto" aria-labelledby="h-contact">
+  <div class="wrap contact-grid">
+    <div class="contact-side">
+      <h2 id="h-contact" style="margin-bottom:20px" data-i18n="ct.h2">Diagnóstico financiero gratis</h2>
+      <p class="lede" data-i18n="ct.lede">Contame cómo está tu empresa hoy. En una reunión de 45 minutos te muestro dónde se pierde margen y qué resolver primero.</p>
+      <ul>
+        <li data-i18n="ct.b1"><b>Sin costo y sin compromiso</b>Te llevás el diagnóstico aunque no sigamos trabajando.</li>
+        <li data-i18n="ct.b2"><b>Confidencial</b>Tus datos se usan solo para preparar la reunión.</li>
+        <li data-i18n="ct.b3"><b>Respuesta en 48 horas hábiles</b>Coordinamos día y hora por email.</li>
+      </ul>
+      <div class="direct">
+        <h3 data-i18n="dir.h3">¿Preferís hablar directo?</h3>
+        <div class="direct-btns">
+          <a class="btn btn-ghost" href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="dir.wa">Escribime por WhatsApp</span></a>
+          <a class="btn btn-ghost" href="mailto:hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="dir.mail">Enviar un email</span></a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-li"/></svg><span data-i18n="dir.li">Ver perfil en LinkedIn</span></a>
+        </div>
+        <p class="direct-meta num"><a href="tel:+34622651407">+34 622 651 407</a> &nbsp;·&nbsp; <a href="mailto:hola@francobarra.com">hola@francobarra.com</a></p>
+      </div>
+    </div>
+
+    <form class="audit" id="audit" novalidate>
+      <div class="form-body">
+        <div class="row2">
+          <div class="field"><label for="fName" data-i18n="f.name">Nombre</label><input id="fName" name="nombre" autocomplete="name" required><div class="err-msg" data-i18n="f.nameErr">Escribí tu nombre.</div></div>
+          <div class="field"><label for="fEmail">Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required><div class="err-msg" data-i18n="f.emailErr">Escribí un email válido, por ejemplo nombre@empresa.com.</div></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="fCo" data-i18n="f.co">Empresa</label><input id="fCo" name="empresa" autocomplete="organization" required><div class="err-msg" data-i18n="f.coErr">Escribí el nombre de tu empresa.</div></div>
+          <div class="field"><label for="fErp" data-i18n="f.erp">Sistema contable o ERP</label>
+            <select id="fErp" name="erp" required>
+              <option value="" data-i18n="f.erp0">Elegí uno</option>
+              <option value="Tango Gestión">Tango Gestión</option><option value="Bejerman">Bejerman</option><option value="Xubio">Xubio</option><option value="Colppy">Colppy</option><option value="SAP Business One">SAP Business One</option><option value="Odoo">Odoo</option><option value="Excel" data-i18n="f.erpX">Solo Excel</option><option value="Otro" data-i18n="f.erpO">Otro</option>
+            </select><div class="err-msg" data-i18n="f.erpErr">Elegí tu sistema. Si no está, elegí “Otro”.</div></div>
+        </div>
+        <fieldset class="field" id="fsPain">
+          <legend data-i18n="f.pain">Tu principal cuello de botella</legend>
+          <div class="picks">
+            <label><input type="radio" name="dolor" value="cash"><span data-i18n="pick.cash">No sé dónde está la caja</span></label>
+            <label><input type="radio" name="dolor" value="margin"><span data-i18n="pick.margin">El margen no cierra</span></label>
+            <label><input type="radio" name="dolor" value="reports"><span data-i18n="pick.reports">Reportes tarde o en Excel</span></label>
+            <label><input type="radio" name="dolor" value="collections"><span data-i18n="pick.collections">Cobranza y mora</span></label>
+            <label><input type="radio" name="dolor" value="growth"><span data-i18n="pick.growth">Planificar el crecimiento</span></label>
+          </div>
+          <div class="err-msg" data-i18n="f.painErr">Elegí la opción que más se parezca a tu situación.</div>
+        </fieldset>
+        <div class="field"><label for="fMsg" data-i18n="f.msg">Contame más <small>(opcional)</small></label><textarea id="fMsg" name="detalle" data-i18n-attr="placeholder:f.msgPh" placeholder="Por ejemplo: facturamos USD 300k por mes, crecimos 40% y la caja no acompaña."></textarea></div>
+        <div class="form-foot">
+          <small data-i18n="f.foot">Al enviar se abre tu correo con la solicitud lista.</small>
+          <button class="btn btn-primary" type="submit" data-i18n="f.submit">Solicitar diagnóstico</button>
+        </div>
+      </div>
+      <div class="done" role="status">
+        <h3 data-i18n="done.h3">Diagnóstico solicitado</h3>
+        <p data-i18n="done.p">Abrimos tu correo con la solicitud lista. Enviala y te respondo en 48 horas hábiles.</p>
+        <p style="font-size:.92rem;color:var(--silver-dim)"><span data-i18n="done.a">¿No se abrió tu correo?</span> <a id="doneMail" href="#" data-i18n="done.b">Abrilo desde acá</a> <span data-i18n="done.c">o escribime a</span> <a id="doneAddr" href="#"></a>.</p>
+        <button class="btn btn-ghost" type="button" id="again" data-i18n="done.again">Enviar otra solicitud</button>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <img class="foot-banner" src="brand%20images/Logo%20file%20dark.png" alt="Franco Barra — Strategic Data Driven" loading="lazy">
+  <div class="foot-in">
+    <span>© <span id="yr"></span> Franco Barra · CPA · FP&amp;A · Data Analytics</span>
+    <div class="foot-contact">
+      <a href="mailto:hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg>hola@francobarra.com</a>
+      <a href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span class="num">+34 622 651 407</span></a>
+      <a href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-li"/></svg>linkedin.com/in/francobarra</a>
+    </div>
+    <span><a href="#servicios" data-i18n="nav.svc">Servicios</a> &nbsp;·&nbsp; <a href="#demo" data-i18n="nav.demo">Tableros</a> &nbsp;·&nbsp; <a href="#contacto" data-i18n="foot.contact">Contacto</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var CONTACT_EMAIL = 'hola@francobarra.com'; // change if needed
+var NS = 'http://www.w3.org/2000/svg';
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var $ = function(s,c){return (c||document).querySelector(s)};
+var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+
+/* =========================================================
+   i18n
+   Static text: Spanish lives in the HTML (data-i18n keys);
+   English lives in STATIC_EN below. Dynamic text (charts,
+   calculator, modal, form) lives in DYN for both languages.
+   ========================================================= */
+var STATIC_EN={
+  'brand.aria':'Franco Barra, home',
+  'nav.pain':'The problem','nav.svc':'Services','nav.demo':'Dashboards','nav.about':'About','nav.cta':'Request a diagnostic','foot.contact':'Contact',
+  'hero.h1':'Strategy, FP&amp;A &amp; Automation for Executives',
+  'hero.sub':'Connect your ERP with probabilistic scenarios and uncover hidden patterns in customer profitability.',
+  'hero.p':'Combining traditional financial rigor (CPA, US GAAP, IFRS) with Power BI and predictive analytics so your company grows with total cash control.',
+  'hero.cta':'Request a free financial diagnostic','hero.cta2':'See sample dashboards',
+  'pipe.aria':'Your scattered data sources consolidate into a single cash dashboard',
+  'dash.aria':'Sample dashboard: consolidated cash position of USD 412,800, 13-week forecast',
+  'dash.title':'Consolidated cash position','dash.live':'live','dash.big':'USD 412,800',
+  'dash.delta':'+8.4% vs. last month · 13-week forecast',
+  'dash.k1':'<b>47 days</b>avg. collection period','dash.k2':'<b>31.4%</b>true gross margin','dash.k3':'<b>3</b>margin alerts',
+  'dash.note':'Illustrative data. The dashed amber line is your minimum operating cash.',
+  'pain.h2':'Today’s growth breaks yesterday’s systems',
+  'pain.lede':'<span class="voice">“Your company is selling, but you don’t know where the cash is.”</span> When revenue climbs fast, the spreadsheet that worked with 30 customers stops working with 300. Margin leaks through places nobody is watching.',
+  'pain.f1':'<b>Margin lost without you noticing</b><span>Off-list discounts, absorbed freight and returns that never reach product cost.</span>',
+  'pain.f2':'<b>Cash mismatches</b><span>You sell on 60-day terms and pay on 30. The faster you grow, the more working capital you finance yourself.</span>',
+  'pain.f3':'<b>Outdated spreadsheets</b><span>Three versions of the same report, each department with its own number, and the close lands 20 days late.</span>',
+  'pain.f4':'<b>Analysis paralysis</b><span>Plenty of data, no decisions: nobody trusts the number enough to act on it.</span>',
+  'sim.h3':'What does not seeing cost you?','sim.p':'Set the sliders to your company’s figures. Everything is calculated in your browser and nothing is stored.',
+  'sim.l1':'Monthly revenue','sim.l2':'Average collection days','sim.l3':'Monthly revenue growth',
+  'sim.l4':'Unallocated margin <small style="color:var(--silver-dim)">(discounts, freight, returns)</small>',
+  'sim.r1':'Margin lost per year','sim.r2':'Cash tied up in receivables','sim.r3':'Extra cash your growth needs over 12 months',
+  'sim.foot':'Rough estimate in USD. The free diagnostic calculates it with your real data.',
+  'svc.h2':'Tools à la carte','svc.lede':'Start with what hurts most. Each service stands on its own and adds more value combined with the others.',
+  'svc1.t':'Financial integrity diagnostic &amp; transaction audit','svc1.f':'One-off project · recommended starting point',
+  'svc1.q':'I find margin leaks, hidden costs and bottlenecks in your billing.','svc1.d':'I review every transaction, not a sample, cross-checking sales, collections and costs to find where the money escapes.',
+  'svc2.t':'One Source of Truth: executive Power BI','svc2.f':'Implementation and maintenance',
+  'svc2.q':'I connect your ERP (Tango, Bejerman, Xubio) and your banks into a single live dashboard.','svc2.d':'One number per KPI, refreshed automatically, read the same way by leadership, sales and finance.',
+  'svc3.t':'FP&amp;A &amp; fractional CFO','svc3.f':'Monthly engagement',
+  'svc3.q':'Monthly strategy meetings to forecast cash, analyze profitability by customer and plan investments.','svc3.d':'Senior CFO judgment at your leadership table, without the cost of a full-time CFO.',
+  'svc4.t':'AI agents &amp; transaction automation','svc4.f':'Custom',
+  'svc4.q':'ETL pipelines in Python and SQL, invoice validation, overdue collections and real-time simulations over WhatsApp or Slack.','svc4.d':'Your finance team’s repetitive tasks run on their own, with controls that warn you before something breaks.',
+  'svc5.t':'Smart Pricing &amp; Margin Optimization','svc5.f':'Project with periodic reviews',
+  'svc5.q':'Data-driven pricing strategies designed to maximize market value capture while guaranteeing target profit margins.','svc5.d':'Demand elasticity per customer tier, dynamic cost-plus and commercial discount governance.',
+  'svc.more':'See scope','svc.feature':'<b>Not sure where to start?</b> The free diagnostic tells you which tool has the highest return for your company today.',
+  'modal.close':'Close','modal.get':'What you get','modal.fit':'A good fit if','modal.cta':'Request this service','modal.back':'Keep browsing',
+  'demo.h2':'Your company, in a single number','demo.lede':'Three dashboards I build often. Try them: they respond just like Power BI in production. The data is illustrative.',
+  'demo.tabs':'Sample dashboards','tab.cash':'Cash forecast','tab.churn':'Churn risk','tab.clus':'Customer segmentation',
+  'cash.title':'13-week cash forecast','cash.unit':'USD thousands','cash.aria':'Chart of actual and forecast cash',
+  'cash.lg1':'Actual','cash.lg2':'Forecast','cash.lg3':'Likely range','cash.lg4':'Minimum cash',
+  'cash.h3':'What if you collect later?','cash.p':'The forecast combines sales, collection terms and committed payments. Change the assumptions and see when cash hits the minimum.',
+  'cash.l1':'Collection days','cash.l2':'Monthly growth',
+  'churn.title':'Customers most likely to churn','churn.sub':'classification model · next 90 days','churn.aria':'Bars showing churn probability by customer',
+  'churn.h3':'Before they leave','churn.p':'The model tracks purchase frequency, falling ticket size and late payments. You get it every Monday, with the list of who to call.',
+  'churn.seg':'Segment','churn.all':'All','churn.may':'Wholesale','churn.ret':'Retail',
+  'clus.title':'Customers by frequency and average ticket','clus.sub':'k-means clustering · 4 groups','clus.aria':'Scatter plot of customers grouped into four segments',
+  'clus.h3':'Not every customer is worth the same','clus.p':'Tap a dot to see the customer. Switch groups on and off to compare.',
+  'imp.1':'in exports backed by auditable financial information.',
+  'imp.2t':'What-if scenario analysis','imp.2':'to decide on pricing, investment and financing with numbers, not gut feel.',
+  'imp.3t':'10+ years','imp.3':'of corporate finance experience in Argentina and Spain.',
+  'about.quote':'An accountant who codes, or a data scientist who reads balance sheets. Financial rigor + Advanced analytics driving your growth.',
+  'about.p1':'Certified Public Accountant (CPA) with over 10 years of international experience across Spain and Argentina, and Senior Finance Manager. Master’s student in Data Science at Universidad Complutense de Madrid.',
+  'about.p2':'Financial closes under US GAAP &amp; IFRS, SAP lead, budgeting, and turnarounds. Bringing enterprise-grade financial discipline to fast-growing companies that need AI integration backed by proven methodology.',
+  'about.stack':'Technical stack and credentials',
+  'career.h3':'Career','career.p':'Most recent first.','career.siglo':'and Universidad Siglo 21',
+  'ct.h2':'Free financial diagnostic','ct.lede':'Tell me where your company stands today. In a 45-minute meeting I’ll show you where margin is leaking and what to fix first.',
+  'ct.b1':'<b>No cost, no commitment</b>You keep the diagnostic even if we don’t work together.',
+  'ct.b2':'<b>Confidential</b>Your data is used only to prepare the meeting.',
+  'ct.b3':'<b>Reply within 48 business hours</b>We’ll set a day and time by email.',
+  'f.name':'Name','f.nameErr':'Enter your name.','f.emailErr':'Enter a valid email, for example name@company.com.',
+  'f.co':'Company','f.coErr':'Enter your company name.','f.erp':'Accounting system or ERP','f.erp0':'Choose one','f.erpX':'Excel only','f.erpO':'Other',
+  'f.erpErr':'Choose your system. If it isn’t listed, choose “Other”.','f.pain':'Your main bottleneck',
+  'pick.cash':'I don’t know where the cash is','pick.margin':'Margins don’t add up','pick.reports':'Late or Excel-based reporting','pick.collections':'Collections and overdue accounts','pick.growth':'Planning for growth',
+  'f.painErr':'Choose the option closest to your situation.','f.msg':'Tell me more <small>(optional)</small>',
+  'f.msgPh':'For example: we bill USD 300k a month, grew 40% and cash isn’t keeping up.',
+  'f.foot':'Submitting opens your email with the request ready to send.','f.submit':'Request diagnostic',
+  'done.h3':'Diagnostic requested','done.p':'We opened your email with the request ready. Send it and I’ll reply within 48 business hours.',
+  'done.a':'Email didn’t open?','done.b':'Open it from here','done.c':'or write to me at','done.again':'Send another request',
+  'soc.li':'LinkedIn profile (opens in a new tab)','soc.liT':'LinkedIn','soc.wa':'Message on WhatsApp (opens in a new tab)','soc.waT':'WhatsApp +34 622 651 407','soc.mail':'Send an email to hola@francobarra.com',
+  'about.photo':'Franco Barra, CPA and financial data specialist',
+  'dir.h3':'Prefer to talk directly?','dir.wa':'Message me on WhatsApp','dir.mail':'Send an email','dir.li':'View LinkedIn profile'
+};
+var WA_NUMBER='34622651407';
+var WA_TEXT={es:'Hola Franco, quiero solicitar un diagnóstico financiero.',en:'Hi Franco, I’d like to request a financial diagnostic.'};
+function setWaLinks(){$$('[data-wa]').forEach(function(a){a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(WA_TEXT[lang])})}
+
+var DYN={
+  es:{
+    locale:'es-AR', title:'Franco Barra · CFO Fraccionado & Power BI',
+    desc:'Estrategia, FP&A y automatización para directivos: Power BI, escenarios y CFO fraccionado para PyMEs que crecen rápido. Franco Barra, CPA.',
+    menuOpen:'Abrir menú', menuClose:'Cerrar menú',
+    days:' días', ofSales:'% de ventas',
+    src:[['Tango Gestión','ventas y stock'],['Banco Galicia · Santander','extractos'],['Mercado Pago','cobros online'],['AFIP / ARCA','comprobantes'],['flujo_caja_v7_FINAL.xlsx','¿cuál es la última?']],
+    today:'hoy', wk:'s', weekTip:'Semana +',
+    cashWarn:function(w){return 'La caja cae por debajo del mínimo en la <b>semana '+w+'</b>. Hay '+w+' semanas para renegociar plazos o conseguir financiamiento.'},
+    cashOk:function(v){return 'La caja se mantiene sobre el mínimo las 13 semanas. Punto más bajo: <b>USD '+v+'k</b>.'},
+    perMonth:'k/mes', segName:{may:'mayorista',ret:'retail'}, churnTip:'% de probabilidad de abandono',
+    churnRisk:function(n,s){return '<b>'+n+' clientes</b> con más de 60% de riesgo. Representan <b>USD '+s+'k</b> de facturación mensual.'},
+    churnNone:'Ningún cliente de este segmento supera el 60% de riesgo.',
+    axX:'pedidos por mes', axY:'ticket promedio (USD)', perMo:' pedidos/mes · ticket USD ', clusPick:'Elegí un cliente en el gráfico.',
+    clus:[['Estrellas','Compran seguido y con ticket alto. Cuidarlos es prioridad uno.'],['Frecuentes de bajo ticket','Mucho volumen operativo, poco margen. Candidatos a pedido mínimo.'],['Grandes ocasionales','Pocas compras grandes. Hay espacio para un acuerdo anual.'],['En riesgo','Frecuencia y ticket en caída. Revisar condiciones y servicio.']],
+    interest:'Me interesa: ',
+    mail:{subject:'Diagnóstico financiero: ',name:'Nombre',email:'Email',co:'Empresa',erp:'Sistema/ERP',pain:'Cuello de botella'},
+    svc:[
+      {t:'Diagnóstico de integridad financiera y auditoría transaccional',s:'Proyecto puntual. El mejor punto de partida.',
+       l:['Mapa de fugas de margen por cliente, producto y vendedor','Conciliación completa de facturación, cobranzas y costos','Detección de duplicados, descuentos fuera de política y notas de crédito anómalas','Informe ejecutivo con impacto en USD y plan de acción priorizado'],
+       f:['Vendés más que el año pasado pero ganás lo mismo o menos','No confiás en el margen que te muestra el sistema']},
+      {t:'One Source of Truth: Power BI ejecutivo',s:'Implementación y mantenimiento.',
+       l:['Conexión automática a Tango, Bejerman, Xubio u otro ERP, y a tus bancos','Modelo de datos único con definiciones de KPI acordadas','Tablero de dirección: caja, ventas, margen, cobranzas y stock','Actualización diaria y acceso desde el celular'],
+       f:['Cada área trae un número distinto a la reunión','El cierre mensual tarda semanas']},
+      {t:'FP&A y CFO fraccionado',s:'Acompañamiento mensual.',
+       l:['Reunión mensual de dirección con agenda y tablero propios','Presupuesto y forecast de caja rodante a 13 semanas y 12 meses','Rentabilidad por cliente, producto y canal','Evaluación de inversiones, financiamiento y precios'],
+       f:['Tomás decisiones grandes sin un CFO al lado','Necesitás presentar números serios a bancos o inversores']},
+      {t:'Agentes de IA y automatización transaccional',s:'A medida.',
+       l:['Pipelines ETL en Python y SQL que reemplazan copiar y pegar','Validación automática de facturas de proveedores','Agente de recupero de mora con seguimiento por WhatsApp','Consultas y simulaciones de caja en tiempo real desde Slack o WhatsApp'],
+       f:['Tu equipo pasa horas en tareas repetitivas','La mora crece porque nadie llega a hacer el seguimiento']},
+      {t:'Precios Inteligentes & Optimización de Margen',s:'Proyecto con revisiones periódicas.',
+       l:['Modelado de elasticidad de demanda por segmento.','Blindaje automático de margen ante variaciones de costes (Cost-plus dinámico).','Gobernanza de descuentos comerciales y eliminación de fugas de caja.'],
+       f:['Actualizás precios a mano cada vez que sube un costo','Cada vendedor aplica descuentos con su propio criterio']}
+    ]
+  },
+  en:{
+    locale:'en-US', title:'Franco Barra · Fractional CFO & Power BI',
+    desc:'Strategy, FP&A and automation for executives: Power BI, scenario analysis and fractional CFO services for fast-growing companies. Franco Barra, CPA.',
+    menuOpen:'Open menu', menuClose:'Close menu',
+    days:' days', ofSales:'% of sales',
+    src:[['Tango Gestión','sales & inventory'],['Banco Galicia · Santander','bank statements'],['Mercado Pago','online payments'],['AFIP / ARCA','tax invoices'],['cash_flow_v7_FINAL.xlsx','which one is the latest?']],
+    today:'today', wk:'w', weekTip:'Week +',
+    cashWarn:function(w){return 'Cash drops below the minimum in <b>week '+w+'</b>. You have '+w+' weeks to renegotiate terms or secure financing.'},
+    cashOk:function(v){return 'Cash stays above the minimum for all 13 weeks. Lowest point: <b>USD '+v+'k</b>.'},
+    perMonth:'k/mo', segName:{may:'wholesale',ret:'retail'}, churnTip:'% churn probability',
+    churnRisk:function(n,s){return '<b>'+n+' customers</b> above 60% risk. They represent <b>USD '+s+'k</b> in monthly revenue.'},
+    churnNone:'No customer in this segment is above 60% risk.',
+    axX:'orders per month', axY:'average ticket (USD)', perMo:' orders/mo · ticket USD ', clusPick:'Pick a customer on the chart.',
+    clus:[['Stars','Frequent buyers with high tickets. Keeping them is priority one.'],['Frequent, low ticket','High operating volume, thin margin. Candidates for a minimum order.'],['Large, occasional','Few, large purchases. Room for an annual agreement.'],['At risk','Frequency and ticket both falling. Review terms and service.']],
+    interest:'I’m interested in: ',
+    mail:{subject:'Financial diagnostic: ',name:'Name',email:'Email',co:'Company',erp:'System/ERP',pain:'Main bottleneck'},
+    svc:[
+      {t:'Financial integrity diagnostic & transaction audit',s:'One-off project. The best starting point.',
+       l:['Map of margin leaks by customer, product and sales rep','Full reconciliation of billing, collections and costs','Detection of duplicates, off-policy discounts and unusual credit notes','Executive report with USD impact and a prioritized action plan'],
+       f:['You sell more than last year but earn the same or less','You don’t trust the margin your system shows you']},
+      {t:'One Source of Truth: executive Power BI',s:'Implementation and maintenance.',
+       l:['Automated connection to Tango, Bejerman, Xubio or another ERP, and to your banks','A single data model with agreed KPI definitions','Leadership dashboard: cash, sales, margin, collections and inventory','Daily refresh and mobile access'],
+       f:['Every department brings a different number to the meeting','The monthly close takes weeks']},
+      {t:'FP&A & fractional CFO',s:'Monthly engagement.',
+       l:['Monthly leadership meeting with its own agenda and dashboard','Budget and rolling cash forecast at 13 weeks and 12 months','Profitability by customer, product and channel','Evaluation of investments, financing and pricing'],
+       f:['You make big decisions without a CFO beside you','You need to present solid numbers to banks or investors']},
+      {t:'AI agents & transaction automation',s:'Custom.',
+       l:['ETL pipelines in Python and SQL that replace copy-and-paste','Automated validation of supplier invoices','Collections agent with WhatsApp follow-up','Real-time cash queries and simulations from Slack or WhatsApp'],
+       f:['Your team spends hours on repetitive tasks','Overdue accounts grow because nobody has time to follow up']},
+      {t:'Smart Pricing & Margin Optimization',s:'Project with periodic reviews.',
+       l:['Demand elasticity modeling per customer tier.','Automated margin protection against cost structure changes.','Commercial discount governance to eliminate margin leaks.'],
+       f:['You update prices by hand every time a cost goes up','Each sales rep applies discounts by their own judgment']}
+    ]
+  }
+};
+var SVC_PAIN=['margin','reports','growth','collections','margin'];
+
+// Capture the Spanish originals from the HTML once.
+var STATIC_ES={}, ATTR_ES={};
+$$('[data-i18n]').forEach(function(e){var k=e.dataset.i18n;if(!(k in STATIC_ES))STATIC_ES[k]=e.innerHTML});
+$$('[data-i18n-attr]').forEach(function(e){e.dataset.i18nAttr.split(';').forEach(function(pair){var p=pair.split(':');ATTR_ES[p[1]]=e.getAttribute(p[0])})});
+
+var lang='es';
+try{var q=new URLSearchParams(location.search).get('lang');var saved=localStorage.getItem('fb-lang');lang=(q==='en'||q==='es')?q:(saved==='en'?'en':'es')}catch(e){}
+function T(){return DYN[lang]}
+function nf(v,d){return Number(v).toLocaleString(T().locale,{maximumFractionDigits:d==null?2:d})}
+function fmtUSD(v){var a=Math.abs(v);if(a>=1e6)return 'USD '+nf(v/1e6)+'M';return 'USD '+nf(Math.round(v/1e3),0)+'k'}
+function fillRange(r){var p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--p',p+'%')}
+
+function applyStatic(){
+  $$('[data-i18n]').forEach(function(e){var k=e.dataset.i18n,v=lang==='en'?STATIC_EN[k]:STATIC_ES[k];if(v!=null)e.innerHTML=v});
+  $$('[data-i18n-attr]').forEach(function(e){e.dataset.i18nAttr.split(';').forEach(function(pair){var p=pair.split(':'),v=lang==='en'?STATIC_EN[p[1]]:ATTR_ES[p[1]];if(v!=null)e.setAttribute(p[0],v)})});
+  document.documentElement.lang=lang==='en'?'en':'es-AR';
+  document.title=T().title;
+  var md=$('meta[name="description"]');if(md)md.setAttribute('content',T().desc);
+  $$('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang)});
+}
+
+$('#yr').textContent = new Date().getFullYear();
+
+/* ---------- nav ---------- */
+var nav=$('#nav'), menuBtn=$('#menuBtn'), links=$('#navLinks');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>8)},{passive:true});
+function menuLabel(){var o=links.classList.contains('open');menuBtn.setAttribute('aria-label',o?T().menuClose:T().menuOpen)}
+menuBtn.addEventListener('click',function(){var o=links.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);menuLabel()});
+$$('a',links).forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuLabel()})});
+
+/* ---------- hero: sources converge into one line ---------- */
+var srcY=[34,98,160,222,286], srcLabels=[];
+var svg=$('#pipeSvg'), field=$('#pipeField'), endY=160;
+srcY.forEach(function(y,i){
+  var n=9, dir=i%2?-1:1, leak=i===4;
+  for(var j=0;j<n;j++){
+    var o=(j-(n-1)/2)*3.2;
+    var d='M0,'+(y+o)+' C170,'+(y+o*1.4+dir*34)+' 360,'+(endY+o*0.9-dir*46)+' 600,'+(endY+o*0.04);
+    var lead=j===Math.floor(n/2);
+    var p=el('path',{d:d,pathLength:1,'class':'strand'+(lead?' lead':'')+(lead&&leak?' leak':'')},svg);
+    p.style.transitionDelay=(0.15+i*0.12+j*0.02)+'s';
+  }
+  var lab=document.createElement('div');
+  lab.className='src'+(leak?' leak':'');
+  lab.style.top=(y/320*100)+'%';
+  lab.style.transitionDelay=(0.1+i*0.12)+'s';
+  field.appendChild(lab); srcLabels.push(lab);
+});
+function drawSrc(){srcLabels.forEach(function(lab,i){var s=T().src[i];lab.textContent=s[0];var sm=document.createElement('small');sm.textContent=s[1];lab.appendChild(sm)})}
+var pipe=$('#pipe');
+if(reduce){pipe.classList.add('go')}else{requestAnimationFrame(function(){setTimeout(function(){pipe.classList.add('go')},350)})}
+
+/* ---------- pain simulator ---------- */
+var sS=$('#sSales'),sD=$('#sDays'),sG=$('#sGrowth'),sL=$('#sLeak');
+function sim(){
+  [sS,sD,sG,sL].forEach(fillRange);
+  var sales=sS.value*1000, days=+sD.value, g=sG.value/100, leak=sL.value/100;
+  $('#oSales').textContent=fmtUSD(sales);
+  $('#oDays').textContent=days+T().days;
+  $('#oGrowth').textContent=nf(sG.value)+'%';
+  $('#oLeak').textContent=nf(sL.value)+T().ofSales;
+  var annual=0; for(var m=0;m<12;m++) annual+=sales*Math.pow(1+g,m);
+  var wc=sales/30*days;
+  var salesM12=sales*Math.pow(1+g,12);
+  var extra=(salesM12-sales)/30*days;
+  $('#rLeak').textContent=fmtUSD(annual*leak);
+  $('#rWc').textContent=fmtUSD(wc);
+  $('#rGrow').textContent=fmtUSD(extra);
+}
+[sS,sD,sG,sL].forEach(function(r){r.addEventListener('input',sim)});
+
+/* ---------- service modal ---------- */
+var modal=$('#svcModal'), current=-1, opener=null;
+function fillSvc(){
+  if(current<0)return; var s=T().svc[current];
+  $('#mTitle').textContent=s.t; $('#mSub').textContent=s.s;
+  $('#mList').innerHTML=''; s.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;$('#mList').appendChild(li)});
+  $('#mFit').innerHTML=''; s.f.forEach(function(x){var li=document.createElement('li');li.textContent=x;$('#mFit').appendChild(li)});
+}
+function openSvc(i,btn){
+  current=i; opener=btn; fillSvc();
+  if(typeof modal.showModal==='function'){modal.showModal()}else{modal.setAttribute('open','')}
+}
+function closeSvc(){if(modal.open){if(modal.close)modal.close();else modal.removeAttribute('open')}}
+modal.addEventListener('close',function(){if(opener)opener.focus()});
+$$('[data-svc]').forEach(function(b){b.addEventListener('click',function(){openSvc(+b.dataset.svc,b)})});
+$('#mClose').addEventListener('click',closeSvc);
+$('#mBack').addEventListener('click',closeSvc);
+modal.addEventListener('click',function(e){if(e.target===modal)closeSvc()});
+$('#mCta').addEventListener('click',function(){
+  var pain=SVC_PAIN[current]; opener=null; closeSvc();
+  var r=$('input[name=dolor][value="'+pain+'"]'); if(r)r.checked=true;
+  var msg=$('#fMsg'); if(!msg.value)msg.value=T().interest+T().svc[current].t+'.';
+  document.getElementById('contacto').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  setTimeout(function(){$('#fName').focus({preventScroll:true})},reduce?0:600);
+});
+
+/* ---------- tabs ---------- */
+var tabs=$$('.tab');
+function selectTab(t,focus){
+  tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
+  if(focus)t.focus();
+}
+tabs.forEach(function(t,i){
+  t.addEventListener('click',function(){selectTab(t)});
+  t.addEventListener('keydown',function(e){
+    var k=e.key, n=null;
+    if(k==='ArrowRight')n=tabs[(i+1)%tabs.length];
+    if(k==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+    if(k==='Home')n=tabs[0]; if(k==='End')n=tabs[tabs.length-1];
+    if(n){e.preventDefault();selectTab(n,true)}
+  });
+});
+
+/* ---------- chart helpers ---------- */
+function scale(d0,d1,r0,r1){return function(v){return r0+(v-d0)/(d1-d0)*(r1-r0)}}
+function line(pts){return pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ')}
+
+/* ---------- cash forecast ---------- */
+var cD=$('#cDays'), cG=$('#cGrowth'), cashSvg=$('#cashChart');
+var HIST=[268,281,262,290,305,296,318]; // weeks -6..0
+var MIN_CASH=150;
+function cashModel(days,g){
+  var lag=Math.max(1,Math.round(days/7)), wg=Math.pow(1+g,1/4.33)-1, base=92;
+  function sales(w){return base*Math.pow(1+wg,w)}
+  var cash=HIST[HIST.length-1], out=[];
+  for(var w=1;w<=13;w++){
+    var coll=sales(w-lag);
+    var pay=sales(w-4)*0.71 + 21 + (w%2===0?24:0) + (w===5||w===9?60:0);
+    cash+=coll-pay; out.push(cash);
+  }
+  return out;
+}
+function drawCash(){
+  fillRange(cD);fillRange(cG);
+  var days=+cD.value, g=cG.value/100;
+  $('#ocDays').textContent=days+T().days;
+  $('#ocGrowth').textContent=nf(cG.value)+'%';
+  var fc=cashModel(days,g);
+  var all=HIST.concat(fc), lo=Math.min.apply(null,all.concat([MIN_CASH]))-60, hi=Math.max.apply(null,all)+70;
+  lo=Math.floor(lo/50)*50; hi=Math.ceil(hi/50)*50;
+  var W=640,H=300,L=44,R=14,T0=14,B=30;
+  var x=scale(-6,13,L,W-R), y=scale(lo,hi,H-B,T0);
+  cashSvg.innerHTML='';
+  for(var v=lo;v<=hi;v+=50){el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),'class':'grid'},cashSvg);var tx=el('text',{x:L-8,y:y(v)+4,'text-anchor':'end'},cashSvg);tx.textContent=v}
+  [-6,-3,0,3,6,9,12].forEach(function(w){var tx=el('text',{x:x(w),y:H-10,'text-anchor':'middle'},cashSvg);tx.textContent=w===0?T().today:(w>0?'+':'')+w+T().wk});
+  var up=[],dn=[];
+  fc.forEach(function(v,i){var w=i+1,s=9*Math.sqrt(w);up.push([x(w),y(v+s)]);dn.unshift([x(w),y(v-s)])});
+  el('path',{d:'M'+x(0)+','+y(HIST[6])+' '+line(up).replace('M','L')+' '+line(dn).replace('M','L')+'Z',fill:'rgba(124,183,255,.16)'},cashSvg);
+  el('line',{x1:L,x2:W-R,y1:y(MIN_CASH),y2:y(MIN_CASH),stroke:'#FFB547','stroke-dasharray':'5 5','stroke-width':1.5},cashSvg);
+  el('line',{x1:x(0),x2:x(0),y1:T0,y2:H-B,stroke:'rgba(185,191,211,.35)'},cashSvg);
+  el('path',{d:line(HIST.map(function(v,i){return [x(i-6),y(v)]})),fill:'none',stroke:'#fff','stroke-width':2.2,'stroke-linejoin':'round'},cashSvg);
+  el('path',{d:line([[x(0),y(HIST[6])]].concat(fc.map(function(v,i){return [x(i+1),y(v)]}))),fill:'none',stroke:'#7CB7FF','stroke-width':2.2,'stroke-dasharray':'6 4','stroke-linejoin':'round'},cashSvg);
+  var breach=-1; fc.forEach(function(v,i){if(breach<0&&v<MIN_CASH)breach=i});
+  fc.forEach(function(v,i){var c=el('circle',{cx:x(i+1),cy:y(v),r:i===breach?6:3,fill:v<MIN_CASH?'#FFB547':'#7CB7FF'},cashSvg);var t=el('title',{},c);t.textContent=T().weekTip+(i+1)+': USD '+Math.round(v)+'k'});
+  var vd=$('#cashVerdict'), minV=Math.min.apply(null,fc);
+  if(breach>=0){vd.className='verdict warn';vd.innerHTML=T().cashWarn(breach+1)}
+  else{vd.className='verdict';vd.innerHTML=T().cashOk(Math.round(minV))}
+}
+cD.addEventListener('input',drawCash);cG.addEventListener('input',drawCash);
+
+/* ---------- churn ---------- */
+var CUST=[
+  {n:'Distribuidora del Centro',s:'may',p:.82,m:38},{n:'Ferretería Los Andes',s:'ret',p:.77,m:9},
+  {n:'Agroinsumos Pampa',s:'may',p:.71,m:52},{n:'Almacén Don Luis',s:'ret',p:.66,m:4},
+  {n:'Mayorista Norte SRL',s:'may',p:.58,m:44},{n:'Corralón San Martín',s:'ret',p:.55,m:12},
+  {n:'Logística Sur SA',s:'may',p:.49,m:27},{n:'Kiosco 24 Horas',s:'ret',p:.44,m:3},
+  {n:'Cooperativa Rural Oeste',s:'may',p:.39,m:61},{n:'Pinturería Color',s:'ret',p:.33,m:7}
+];
+var churnSvg=$('#churnChart'), churnSeg='all';
+function drawChurn(seg){
+  churnSeg=seg;
+  var rows=CUST.filter(function(c){return seg==='all'||c.s===seg}).slice(0,8);
+  var W=640,L=196,R=60,T0=10,rowH=38,H=T0+rows.length*rowH+24;
+  churnSvg.setAttribute('viewBox','0 0 '+W+' '+H);
+  churnSvg.innerHTML='';
+  var x=scale(0,1,L,W-R);
+  [0,.25,.5,.75,1].forEach(function(v){el('line',{x1:x(v),x2:x(v),y1:T0,y2:H-22,'class':'grid'},churnSvg);var t=el('text',{x:x(v),y:H-6,'text-anchor':'middle'},churnSvg);t.textContent=Math.round(v*100)+'%'});
+  rows.forEach(function(c,i){
+    var yy=T0+i*rowH;
+    var t=el('text',{x:L-12,y:yy+16,'text-anchor':'end',style:'fill:#fff;font-size:13px'},churnSvg);t.textContent=c.n;
+    var t2=el('text',{x:L-12,y:yy+30,'text-anchor':'end'},churnSvg);t2.textContent='USD '+c.m+T().perMonth+' · '+T().segName[c.s];
+    var hot=c.p>=.6;
+    var r=el('rect',{x:L,y:yy+8,height:18,rx:3,width:0,fill:hot?'#FFB547':'#7CB7FF',opacity:hot?1:.75},churnSvg);
+    var tt=el('title',{},r);tt.textContent=c.n+': '+Math.round(c.p*100)+T().churnTip;
+    var lbl=el('text',{x:x(c.p)+8,y:yy+21,style:'fill:#fff;font-size:12px'},churnSvg);lbl.textContent=Math.round(c.p*100)+'%';
+    requestAnimationFrame(function(){r.style.transition=reduce?'none':'width .6s cubic-bezier(.2,.7,.2,1) '+(i*0.04)+'s';r.setAttribute('width',x(c.p)-L)});
+  });
+  var risk=rows.filter(function(c){return c.p>=.6}), sum=risk.reduce(function(a,c){return a+c.m},0);
+  $('#churnVerdict').innerHTML=risk.length?T().churnRisk(risk.length,sum):T().churnNone;
+}
+$$('[data-seg]').forEach(function(b){b.addEventListener('click',function(){$$('[data-seg]').forEach(function(x){x.setAttribute('aria-pressed',x===b)});drawChurn(b.dataset.seg)})});
+
+/* ---------- clusters ---------- */
+var seed=7;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}
+function gauss(){return Math.sqrt(-2*Math.log(rnd()+1e-9))*Math.cos(2*Math.PI*rnd())}
+var CL=[
+  {c:'#7CB7FF',fx:9,fy:820,sx:1.6,sy:150,n:16},
+  {c:'#B9BFD3',fx:11,fy:210,sx:2,sy:70,n:30},
+  {c:'#B79CFF',fx:2.6,fy:1150,sx:1,sy:200,n:14},
+  {c:'#FFB547',fx:2.2,fy:260,sx:1,sy:90,n:24}
+];
+var names=['Comercial','Distribuidora','Agro','Ferretería','Logística','Industrias','Almacén','Corralón','Mayorista','Insumos'];
+var places=['Norte','Sur','Centro','del Litoral','Andina','Pampa','Oeste','del Valle'];
+var PTS=[];
+CL.forEach(function(g,gi){for(var i=0;i<g.n;i++){
+  var f=Math.max(.4,g.fx+gauss()*g.sx), t=Math.max(40,g.fy+gauss()*g.sy);
+  PTS.push({g:gi,f:f,t:t,name:names[Math.floor(rnd()*names.length)]+' '+places[Math.floor(rnd()*places.length)]});
+}});
+var on=CL.map(function(){return true}), clusSvg=$('#clusChart'), picked=null;
+function showPick(){
+  var info=$('#clusInfo');
+  if(!picked){info.className='verdict cluster-info';info.textContent=T().clusPick;return}
+  var p=picked, g=T().clus[p.g];
+  info.className='verdict cluster-info'+(p.g===3?' warn':'');
+  info.innerHTML='';
+  var b=document.createElement('b');b.textContent=p.name;info.appendChild(b);
+  info.appendChild(document.createElement('br'));
+  info.appendChild(document.createTextNode(nf(p.f,1)+T().perMo+Math.round(p.t)));
+  info.appendChild(document.createElement('br'));
+  var s=document.createElement('span');s.style.color='var(--text-mute)';s.textContent=g[0]+': '+g[1];info.appendChild(s);
+}
+function drawClus(){
+  var W=640,H=330,L=50,R=14,T0=12,B=40;
+  var x=scale(0,15,L,W-R), y=scale(0,1600,H-B,T0);
+  clusSvg.innerHTML='';
+  [0,400,800,1200,1600].forEach(function(v){el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),'class':'grid'},clusSvg);var t=el('text',{x:L-8,y:y(v)+4,'text-anchor':'end'},clusSvg);t.textContent=nf(v,0)});
+  [0,3,6,9,12,15].forEach(function(v){var t=el('text',{x:x(v),y:H-B+18,'text-anchor':'middle'},clusSvg);t.textContent=v});
+  var ax=el('text',{x:(W+L)/2,y:H-4,'text-anchor':'middle'},clusSvg);ax.textContent=T().axX;
+  var ay=el('text',{x:12,y:(H-B+T0)/2,'text-anchor':'middle',transform:'rotate(-90 12 '+((H-B+T0)/2)+')'},clusSvg);ay.textContent=T().axY;
+  PTS.forEach(function(p){
+    if(!on[p.g])return;
+    var c=el('circle',{cx:x(Math.min(p.f,15)),cy:y(Math.min(p.t,1600)),r:4.5,fill:CL[p.g].c,opacity:.85,'class':'dot',tabindex:0,role:'button','aria-label':p.name},clusSvg);
+    if(p===picked){c.setAttribute('stroke','#fff');c.setAttribute('stroke-width','2')}
+    var tt=el('title',{},c);tt.textContent=p.name;
+    function pick(){
+      $$('.dot',clusSvg).forEach(function(d){d.setAttribute('stroke','none')});
+      c.setAttribute('stroke','#fff');c.setAttribute('stroke-width','2');
+      picked=p; showPick();
+    }
+    c.addEventListener('click',pick);
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}});
+  });
+}
+var chips=$('#clusChips'), chipBtns=[];
+CL.forEach(function(g,i){
+  var b=document.createElement('button');b.type='button';b.className='chip-toggle';b.setAttribute('aria-pressed','true');
+  b.addEventListener('click',function(){
+    if(on[i]&&on.filter(Boolean).length===1)return;
+    on[i]=!on[i];b.setAttribute('aria-pressed',on[i]);drawClus();
+  });
+  chips.appendChild(b); chipBtns.push(b);
+});
+function drawChips(){
+  chipBtns.forEach(function(b,i){
+    b.innerHTML='';
+    var dot=document.createElement('i');dot.style.background=CL[i].c;b.appendChild(dot);
+    b.appendChild(document.createTextNode(T().clus[i][0]+' '));
+    var n=document.createElement('span');n.style.color='var(--text-mute)';n.textContent=CL[i].n;b.appendChild(n);
+  });
+}
+
+/* ---------- form ---------- */
+var form=$('#audit'), emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function check(id,ok){var f=$('#'+id).closest('.field');f.classList.toggle('err',!ok);return ok}
+function validate(){
+  var ok=true, first=null;
+  [['fName',function(v){return v.trim().length>1}],['fEmail',function(v){return emailRe.test(v.trim())}],['fCo',function(v){return v.trim().length>1}],['fErp',function(v){return !!v}]].forEach(function(r){
+    var input=$('#'+r[0]), good=check(r[0],r[1](input.value)); input.setAttribute('aria-invalid',!good);
+    if(!good){ok=false;if(!first)first=input}
+  });
+  var pain=$('input[name=dolor]:checked'), fs=$('#fsPain');
+  fs.classList.toggle('err',!pain); if(!pain){ok=false;if(!first)first=$('input[name=dolor]')}
+  if(first)first.focus();
+  return ok;
+}
+$$('#audit input, #audit select').forEach(function(i){
+  i.addEventListener('input',function(){var f=i.closest('.field');if(f&&f.classList.contains('err')){if(i.type==='radio')f.classList.remove('err');else f.classList.toggle('err',i.id==='fEmail'?!emailRe.test(i.value.trim()):!i.value.trim())}});
+  i.addEventListener('change',function(){var f=i.closest('.field');if(f&&i.type==='radio')f.classList.remove('err')});
+});
+var lastMail='';
+function setDoneLinks(){if(!lastMail)return;$('#doneMail').href=lastMail;$('#doneAddr').href='mailto:'+CONTACT_EMAIL;$('#doneAddr').textContent=CONTACT_EMAIL}
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(!validate())return;
+  var d=new FormData(form), m=T().mail;
+  var painEl=$('input[name=dolor]:checked'), painTxt=painEl?painEl.nextElementSibling.textContent:'';
+  var erpTxt=$('#fErp').options[$('#fErp').selectedIndex].text;
+  var body=m.name+': '+d.get('nombre')+'\n'+m.email+': '+d.get('email')+'\n'+m.co+': '+d.get('empresa')+'\n'+m.erp+': '+erpTxt+'\n'+m.pain+': '+painTxt+'\n\n'+(d.get('detalle')||'');
+  lastMail='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(m.subject+d.get('empresa'))+'&body='+encodeURIComponent(body);
+  setDoneLinks();
+  form.classList.add('sent');
+  $('.done h3',form).setAttribute('tabindex','-1');$('.done h3',form).focus();
+  window.location.href=lastMail;
+});
+$('#again').addEventListener('click',function(){form.reset();form.classList.remove('sent');$('#fName').focus()});
+
+/* CTA links: smooth scroll + focus first field */
+$$('[data-cta]').forEach(function(a){a.addEventListener('click',function(e){
+  e.preventDefault();document.getElementById('contacto').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  setTimeout(function(){$('#fName').focus({preventScroll:true})},reduce?0:650);
+})});
+
+/* ---------- language switch ---------- */
+function render(){
+  applyStatic(); menuLabel(); drawSrc(); sim(); drawCash(); drawChurn(churnSeg);
+  drawChips(); drawClus(); showPick(); fillSvc(); setDoneLinks(); setWaLinks();
+}
+$$('[data-lang]').forEach(function(b){b.addEventListener('click',function(){
+  if(b.dataset.lang===lang)return;
+  lang=b.dataset.lang;
+  try{localStorage.setItem('fb-lang',lang)}catch(e){}
+  render();
+})});
+render();
+})();
+</script>
+</body>
+</html>
