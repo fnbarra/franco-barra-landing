@@ -282,6 +282,8 @@ fieldset.field{border:0;margin:0 0 18px;padding:0}
 .picks input:focus-visible + span{outline:2px solid var(--flow);outline-offset:2px}
 .form-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:8px}
 .form-foot small{font-size:.82rem;color:var(--silver-dim);max-width:34ch}
+.form-error{margin:14px 0 0;color:var(--signal);font-size:.92rem}
+.form-error[hidden]{display:none}
 .done{display:none;text-align:left}
 .done h3{margin-bottom:10px}
 form.audit.sent .form-body{display:none}
@@ -390,14 +392,14 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
         <div class="social">
           <a href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.li" aria-label="Perfil de LinkedIn (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-li"/></svg></a>
           <a href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.wa" aria-label="Escribir por WhatsApp (se abre en otra pestaña)"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
-          <a href="mailto:hola@francobarra.com" data-i18n-attr="aria-label:soc.mail" aria-label="Enviar un email a hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+          <a href="#contacto" data-cta data-i18n-attr="aria-label:soc.mail" aria-label="Ir al formulario de contacto"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>
       </li>
     </ul>
     <div class="social">
       <a href="https://www.linkedin.com/in/francobarra/" target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.li;title:soc.liT" aria-label="Perfil de LinkedIn (se abre en otra pestaña)" title="LinkedIn"><svg aria-hidden="true"><use href="#i-li"/></svg></a>
       <a href="https://wa.me/34622651407" data-wa target="_blank" rel="noopener" data-i18n-attr="aria-label:soc.wa;title:soc.waT" aria-label="Escribir por WhatsApp (se abre en otra pestaña)" title="WhatsApp +34 622 651 407"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
-      <a href="mailto:hola@francobarra.com" data-i18n-attr="aria-label:soc.mail" aria-label="Enviar un email a hola@francobarra.com" title="hola@francobarra.com"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+      <a href="#contacto" data-cta data-i18n-attr="aria-label:soc.mail" aria-label="Ir al formulario de contacto" title="Contacto"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
     </div>
     <div class="lang" role="group" aria-label="Idioma / Language">
       <button type="button" data-lang="es" aria-pressed="true" lang="es" aria-label="Español">ES</button><span aria-hidden="true">|</span><button type="button" data-lang="en" aria-pressed="false" lang="en" aria-label="English">EN</button>
@@ -416,7 +418,7 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
       <h1 id="h-hero"><span data-i18n="hero.h1">Estrategia, FP&amp;A &amp; Automatismos para Directivos</span>
         <span class="h1-sub" data-i18n="hero.sub">Conecta tu ERP con escenarios probabilísticos y descubre patrones ocultos en la rentabilidad de tus clientes.</span>
       </h1>
-      <p class="lede" data-i18n="hero.p">Unimos la solidez financiera tradicional (CPA, US GAAP, IFRS) con Power BI y analítica predictiva para que tu PyME crezca con control absoluto de la caja.</p>
+      <p class="lede" data-i18n="hero.p">Unimos la solidez financiera tradicional (CPA, US GAAP, IFRS) con Power BI y analítica predictiva para que tu PyME crezca con control de la caja. Construimos CFO digital a tu medida.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#contacto" data-cta data-i18n="hero.cta">Solicitar diagnóstico financiero gratis</a>
         <a class="btn btn-ghost" href="#demo" data-i18n="hero.cta2">Ver tableros de ejemplo</a>
@@ -530,7 +532,7 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
         <button class="btn btn-ghost" data-svc="1" data-i18n="svc.more">Ver alcance</button>
       </article>
       <article class="svc">
-        <div><h3 data-i18n="svc3.t">FP&amp;A y CFO fraccionado</h3><span class="svc-format" data-i18n="svc3.f">Acompañamiento mensual</span></div>
+        <div><h3 data-i18n="svc3.t">FP&amp;A y CFO Outsourced</h3><span class="svc-format" data-i18n="svc3.f">Acompañamiento mensual</span></div>
         <div><p class="svc-quote" data-i18n="svc3.q">Reuniones mensuales de estrategia para proyectar caja, analizar rentabilidad por cliente y planificar inversiones.</p><p class="svc-detail" data-i18n="svc3.d">Criterio de CFO senior en tu mesa directiva, sin el costo de un CFO de tiempo completo.</p></div>
         <button class="btn btn-ghost" data-svc="2" data-i18n="svc.more">Ver alcance</button>
       </article>
@@ -653,7 +655,7 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
       <p data-i18n="about.p1">Soy contador público (CPA) con más de 10 años de experiencia internacional en España y Argentina, y Senior Finance Manager. Soy estudiante del Máster en Data Science de la Universidad Complutense de Madrid.</p>
       <p data-i18n="about.p2">Cierres bajo US GAAP e IFRS, líder SAP, presupuestos y reestructuraciones. Hoy llevo ese rigor a PyMEs que crecen más rápido que sus sistemas. Que necesitan la ayuda de la IA pero no tienen método.</p>
       <div class="stack" data-i18n-attr="aria-label:about.stack" aria-label="Stack técnico y credenciales">
-        <span class="cert">Power BI (PL-300)</span>
+        <span class="cert">Power BI</span>
         <span class="cert">CPA</span>
         <span>SQL</span>
         <span>SAP FICO</span>
@@ -669,10 +671,10 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
       <h3 data-i18n="career.h3">Trayectoria</h3>
       <p data-i18n="career.p">De la más reciente a la primera.</p>
       <ol>
-        <li>WECOART INNOVA</li>
+        <li>Wecoart</li>
         <li>Industria Lam</li>
         <li>Samal Agro</li>
-        <li>Distech <small data-i18n="career.siglo">y Universidad Siglo 21</small></li>
+        <li>Universidad Siglo 21</li>
         <li>Emerson</li>
         <li>Holcim</li>
       </ol>
@@ -688,7 +690,7 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
       <p class="lede" data-i18n="ct.lede">Contame cómo está tu empresa hoy. En una reunión de 45 minutos te muestro dónde se pierde margen y qué resolver primero.</p>
       <ul>
         <li data-i18n="ct.b1"><b>Sin costo y sin compromiso</b>Te llevás el diagnóstico aunque no sigamos trabajando.</li>
-        <li data-i18n="ct.b2"><b>Confidencial</b>Tus datos se usan solo para preparar la reunión.</li>
+        <li data-i18n="ct.b2"><b>Confidencial</b>Tus datos se usan solo para preparar la reunión y se entregan a través de Formspree.</li>
         <li data-i18n="ct.b3"><b>Respuesta en 48 horas hábiles</b>Coordinamos día y hora por email.</li>
       </ul>
       <div class="direct">
@@ -702,7 +704,7 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
       </div>
     </div>
 
-    <form class="audit" id="audit" novalidate>
+    <form class="audit" id="audit" action="https://formspree.io/f/mkjjbwjq" method="POST" novalidate>
       <div class="form-body">
         <div class="row2">
           <div class="field"><label for="fName" data-i18n="f.name">Nombre</label><input id="fName" name="nombre" autocomplete="name" required><div class="err-msg" data-i18n="f.nameErr">Escribí tu nombre.</div></div>
@@ -717,26 +719,28 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
             </select><div class="err-msg" data-i18n="f.erpErr">Elegí tu sistema. Si no está, elegí “Otro”.</div></div>
         </div>
         <fieldset class="field" id="fsPain">
-          <legend data-i18n="f.pain">Tu principal cuello de botella</legend>
+          <legend data-i18n="f.pain">Motivo del contacto</legend>
           <div class="picks">
             <label><input type="radio" name="dolor" value="cash"><span data-i18n="pick.cash">No sé dónde está la caja</span></label>
             <label><input type="radio" name="dolor" value="margin"><span data-i18n="pick.margin">El margen no cierra</span></label>
             <label><input type="radio" name="dolor" value="reports"><span data-i18n="pick.reports">Reportes tarde o en Excel</span></label>
             <label><input type="radio" name="dolor" value="collections"><span data-i18n="pick.collections">Cobranza y mora</span></label>
             <label><input type="radio" name="dolor" value="growth"><span data-i18n="pick.growth">Planificar el crecimiento</span></label>
+            <label><input type="radio" name="dolor" value="contact"><span data-i18n="pick.contact">Contacto</span></label>
           </div>
           <div class="err-msg" data-i18n="f.painErr">Elegí la opción que más se parezca a tu situación.</div>
         </fieldset>
         <div class="field"><label for="fMsg" data-i18n="f.msg">Contame más <small>(opcional)</small></label><textarea id="fMsg" name="detalle" data-i18n-attr="placeholder:f.msgPh" placeholder="Por ejemplo: facturamos USD 300k por mes, crecimos 40% y la caja no acompaña."></textarea></div>
         <div class="form-foot">
-          <small data-i18n="f.foot">Al enviar se abre tu correo con la solicitud lista.</small>
-          <button class="btn btn-primary" type="submit" data-i18n="f.submit">Solicitar diagnóstico</button>
+          <small data-i18n="f.foot">Tu consulta se envía de forma segura a través de Formspree.</small>
+          <button class="btn btn-primary" type="submit" data-i18n="f.submit">Solicita diagnóstico</button>
         </div>
+        <p class="form-error" id="formError" role="alert" tabindex="-1" hidden><span data-i18n="f.sendError">No pudimos enviar tu consulta. Intentá nuevamente o escribime a</span> <a href="mailto:hola@francobarra.com">hola@francobarra.com</a>.</p>
       </div>
       <div class="done" role="status">
-        <h3 data-i18n="done.h3">Diagnóstico solicitado</h3>
-        <p data-i18n="done.p">Abrimos tu correo con la solicitud lista. Enviala y te respondo en 48 horas hábiles.</p>
-        <p style="font-size:.92rem;color:var(--silver-dim)"><span data-i18n="done.a">¿No se abrió tu correo?</span> <a id="doneMail" href="#" data-i18n="done.b">Abrilo desde acá</a> <span data-i18n="done.c">o escribime a</span> <a id="doneAddr" href="#"></a>.</p>
+        <h3 data-i18n="done.h3">Consulta enviada</h3>
+        <p data-i18n="done.p">Tu consulta se envió correctamente. Te respondo dentro de las próximas 48 horas hábiles.</p>
+        <p style="font-size:.92rem;color:var(--silver-dim)"><span data-i18n="done.c">También podés escribirme a</span> <a href="mailto:hola@francobarra.com">hola@francobarra.com</a>.</p>
         <button class="btn btn-ghost" type="button" id="again" data-i18n="done.again">Enviar otra solicitud</button>
       </div>
     </form>
@@ -760,7 +764,6 @@ form.audit.sent .done{display:block;animation:pop .35s ease-out}
 <script>
 (function(){
 'use strict';
-var CONTACT_EMAIL = 'hola@francobarra.com'; // change if needed
 var NS = 'http://www.w3.org/2000/svg';
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var $ = function(s,c){return (c||document).querySelector(s)};
@@ -778,7 +781,7 @@ var STATIC_EN={
   'nav.pain':'The problem','nav.svc':'Services','nav.demo':'Dashboards','nav.about':'About','nav.cta':'Request a diagnostic','foot.contact':'Contact',
   'hero.h1':'Strategy, FP&amp;A &amp; Automation for Executives',
   'hero.sub':'Connect your ERP with probabilistic scenarios and uncover hidden patterns in customer profitability.',
-  'hero.p':'Combining traditional financial rigor (CPA, US GAAP, IFRS) with Power BI and predictive analytics so your company grows with total cash control.',
+  'hero.p':'We combine traditional financial rigor (CPA, US GAAP, IFRS) with Power BI and predictive analytics so your company grows with control over its cash. We build a digital CFO tailored to you.',
   'hero.cta':'Request a free financial diagnostic','hero.cta2':'See sample dashboards',
   'pipe.aria':'Your scattered data sources consolidate into a single cash dashboard',
   'dash.aria':'Sample dashboard: consolidated cash position of USD 412,800, 13-week forecast',
@@ -802,7 +805,7 @@ var STATIC_EN={
   'svc1.q':'I find margin leaks, hidden costs and bottlenecks in your billing.','svc1.d':'I review every transaction, not a sample, cross-checking sales, collections and costs to find where the money escapes.',
   'svc2.t':'One Source of Truth: executive Power BI','svc2.f':'Implementation and maintenance',
   'svc2.q':'I connect your ERP (Tango, Bejerman, Xubio) and your banks into a single live dashboard.','svc2.d':'One number per KPI, refreshed automatically, read the same way by leadership, sales and finance.',
-  'svc3.t':'FP&amp;A &amp; fractional CFO','svc3.f':'Monthly engagement',
+  'svc3.t':'FP&amp;A &amp; Outsourced CFO','svc3.f':'Monthly engagement',
   'svc3.q':'Monthly strategy meetings to forecast cash, analyze profitability by customer and plan investments.','svc3.d':'Senior CFO judgment at your leadership table, without the cost of a full-time CFO.',
   'svc4.t':'AI agents &amp; transaction automation','svc4.f':'Custom',
   'svc4.q':'ETL pipelines in Python and SQL, invoice validation, overdue collections and real-time simulations over WhatsApp or Slack.','svc4.d':'Your finance team’s repetitive tasks run on their own, with controls that warn you before something breaks.',
@@ -831,18 +834,19 @@ var STATIC_EN={
   'career.h3':'Career','career.p':'Most recent first.','career.siglo':'and Universidad Siglo 21',
   'ct.h2':'Free financial diagnostic','ct.lede':'Tell me where your company stands today. In a 45-minute meeting I’ll show you where margin is leaking and what to fix first.',
   'ct.b1':'<b>No cost, no commitment</b>You keep the diagnostic even if we don’t work together.',
-  'ct.b2':'<b>Confidential</b>Your data is used only to prepare the meeting.',
+  'ct.b2':'<b>Confidential</b>Your data is used only to prepare the meeting and delivered through Formspree.',
   'ct.b3':'<b>Reply within 48 business hours</b>We’ll set a day and time by email.',
   'f.name':'Name','f.nameErr':'Enter your name.','f.emailErr':'Enter a valid email, for example name@company.com.',
   'f.co':'Company','f.coErr':'Enter your company name.','f.erp':'Accounting system or ERP','f.erp0':'Choose one','f.erpX':'Excel only','f.erpO':'Other',
-  'f.erpErr':'Choose your system. If it isn’t listed, choose “Other”.','f.pain':'Your main bottleneck',
-  'pick.cash':'I don’t know where the cash is','pick.margin':'Margins don’t add up','pick.reports':'Late or Excel-based reporting','pick.collections':'Collections and overdue accounts','pick.growth':'Planning for growth',
+  'f.erpErr':'Choose your system. If it isn’t listed, choose “Other”.','f.pain':'Reason for contacting',
+  'pick.cash':'I don’t know where the cash is','pick.margin':'Margins don’t add up','pick.reports':'Late or Excel-based reporting','pick.collections':'Collections and overdue accounts','pick.growth':'Planning for growth','pick.contact':'Contact',
   'f.painErr':'Choose the option closest to your situation.','f.msg':'Tell me more <small>(optional)</small>',
   'f.msgPh':'For example: we bill USD 300k a month, grew 40% and cash isn’t keeping up.',
-  'f.foot':'Submitting opens your email with the request ready to send.','f.submit':'Request diagnostic',
-  'done.h3':'Diagnostic requested','done.p':'We opened your email with the request ready. Send it and I’ll reply within 48 business hours.',
-  'done.a':'Email didn’t open?','done.b':'Open it from here','done.c':'or write to me at','done.again':'Send another request',
-  'soc.li':'LinkedIn profile (opens in a new tab)','soc.liT':'LinkedIn','soc.wa':'Message on WhatsApp (opens in a new tab)','soc.waT':'WhatsApp +34 622 651 407','soc.mail':'Send an email to hola@francobarra.com',
+  'f.foot':'Your request is sent securely through Formspree.','f.submit':'Request a diagnostic',
+  'f.sendError':'We couldn’t send your request. Please try again or email me at',
+  'done.h3':'Request sent','done.p':'Your request was sent successfully. I’ll reply within 48 business hours.',
+  'done.c':'You can also email me at','done.again':'Send another request',
+  'soc.li':'LinkedIn profile (opens in a new tab)','soc.liT':'LinkedIn','soc.wa':'Message on WhatsApp (opens in a new tab)','soc.waT':'WhatsApp +34 622 651 407','soc.mail':'Go to the contact form',
   'about.photo':'Franco Barra, CPA and financial data specialist',
   'dir.h3':'Prefer to talk directly?','dir.wa':'Message me on WhatsApp','dir.mail':'Send an email','dir.li':'View LinkedIn profile'
 };
@@ -874,7 +878,7 @@ var DYN={
       {t:'One Source of Truth: Power BI ejecutivo',s:'Implementación y mantenimiento.',
        l:['Conexión automática a Tango, Bejerman, Xubio u otro ERP, y a tus bancos','Modelo de datos único con definiciones de KPI acordadas','Tablero de dirección: caja, ventas, margen, cobranzas y stock','Actualización diaria y acceso desde el celular'],
        f:['Cada área trae un número distinto a la reunión','El cierre mensual tarda semanas']},
-      {t:'FP&A y CFO fraccionado',s:'Acompañamiento mensual.',
+      {t:'FP&A y CFO Outsourced',s:'Acompañamiento mensual.',
        l:['Reunión mensual de dirección con agenda y tablero propios','Presupuesto y forecast de caja rodante a 13 semanas y 12 meses','Rentabilidad por cliente, producto y canal','Evaluación de inversiones, financiamiento y precios'],
        f:['Tomás decisiones grandes sin un CFO al lado','Necesitás presentar números serios a bancos o inversores']},
       {t:'Agentes de IA y automatización transaccional',s:'A medida.',
@@ -1202,22 +1206,36 @@ $$('#audit input, #audit select').forEach(function(i){
   i.addEventListener('input',function(){var f=i.closest('.field');if(f&&f.classList.contains('err')){if(i.type==='radio')f.classList.remove('err');else f.classList.toggle('err',i.id==='fEmail'?!emailRe.test(i.value.trim()):!i.value.trim())}});
   i.addEventListener('change',function(){var f=i.closest('.field');if(f&&i.type==='radio')f.classList.remove('err')});
 });
-var lastMail='';
-function setDoneLinks(){if(!lastMail)return;$('#doneMail').href=lastMail;$('#doneAddr').href='mailto:'+CONTACT_EMAIL;$('#doneAddr').textContent=CONTACT_EMAIL}
-form.addEventListener('submit',function(e){
+var submitButton=$('button[type="submit"]',form), formError=$('#formError');
+form.addEventListener('submit',async function(e){
   e.preventDefault();
   if(!validate())return;
   var d=new FormData(form), m=T().mail;
   var painEl=$('input[name=dolor]:checked'), painTxt=painEl?painEl.nextElementSibling.textContent:'';
   var erpTxt=$('#fErp').options[$('#fErp').selectedIndex].text;
-  var body=m.name+': '+d.get('nombre')+'\n'+m.email+': '+d.get('email')+'\n'+m.co+': '+d.get('empresa')+'\n'+m.erp+': '+erpTxt+'\n'+m.pain+': '+painTxt+'\n\n'+(d.get('detalle')||'');
-  lastMail='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(m.subject+d.get('empresa'))+'&body='+encodeURIComponent(body);
-  setDoneLinks();
-  form.classList.add('sent');
-  $('.done h3',form).setAttribute('tabindex','-1');$('.done h3',form).focus();
-  window.location.href=lastMail;
+  d.set('_subject',m.subject+d.get('empresa'));
+  d.set('erp',erpTxt);
+  d.set('dolor',painTxt);
+  formError.hidden=true;
+  submitButton.disabled=true;
+  submitButton.textContent=lang==='en'?'Sending…':'Enviando…';
+  form.setAttribute('aria-busy','true');
+  try{
+    var response=await fetch(form.action,{method:'POST',body:d,headers:{'Accept':'application/json'}});
+    if(!response.ok)throw new Error('Formspree returned HTTP '+response.status);
+    form.classList.add('sent');
+    $('.done h3',form).setAttribute('tabindex','-1');$('.done h3',form).focus();
+  }catch(error){
+    console.error('Form submission failed:',error);
+    formError.hidden=false;
+    formError.focus();
+  }finally{
+    submitButton.disabled=false;
+    submitButton.textContent=lang==='en'?STATIC_EN['f.submit']:STATIC_ES['f.submit'];
+    form.removeAttribute('aria-busy');
+  }
 });
-$('#again').addEventListener('click',function(){form.reset();form.classList.remove('sent');$('#fName').focus()});
+$('#again').addEventListener('click',function(){form.reset();form.classList.remove('sent');formError.hidden=true;$('#fName').focus()});
 
 /* CTA links: smooth scroll + focus first field */
 $$('[data-cta]').forEach(function(a){a.addEventListener('click',function(e){
@@ -1228,7 +1246,7 @@ $$('[data-cta]').forEach(function(a){a.addEventListener('click',function(e){
 /* ---------- language switch ---------- */
 function render(){
   applyStatic(); menuLabel(); drawSrc(); sim(); drawCash(); drawChurn(churnSeg);
-  drawChips(); drawClus(); showPick(); fillSvc(); setDoneLinks(); setWaLinks();
+  drawChips(); drawClus(); showPick(); fillSvc(); setWaLinks();
 }
 $$('[data-lang]').forEach(function(b){b.addEventListener('click',function(){
   if(b.dataset.lang===lang)return;
