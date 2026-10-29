@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Franco Barra · CFO Digital & Power BI</title>
-<meta name="description" content="CFO digital y Power BI ejecutivo, con ciencia de datos para PyMEs que crecen rápido. Franco Barra, CPA.">
-<meta property="og:title" content="Franco Barra — Strategic Data Driven">
+<title>CFO Digital y Power BI para PyMEs | Franco Barra</title>
+<meta name="description" content="Unimos la solidez financiera tradicional con dashboards en tiempo real, analítica predictiva y toma de decisiones prescriptiva. Creamos un CFO Digital copiloto para que tu PyME esté a la vanguardia.">
+<meta property="og:title" content="CFO Digital y Power BI para PyMEs | Franco Barra">
+<meta property="og:description" content="Unimos la solidez financiera tradicional con dashboards en tiempo real, analítica predictiva y toma de decisiones prescriptiva. Creamos un CFO Digital copiloto para que tu PyME esté a la vanguardia.">
 <meta property="og:image" content="brand%20images/Marca%20Personal.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -856,8 +857,8 @@ function setWaLinks(){$$('[data-wa]').forEach(function(a){a.href='https://wa.me/
 
 var DYN={
   es:{
-    locale:'es-AR', title:'Franco Barra · CFO Digital | Strategic Business, Finance & Data',
-    desc:'Estrategia, FP&A y automatización para directivos: Power BI, escenarios y CFO fraccionado para PyMEs que crecen rápido. Franco Barra, CPA.',
+    locale:'es-AR', title:'CFO Digital y Power BI para PyMEs | Franco Barra',
+    desc:'Unimos la solidez financiera tradicional con dashboards en tiempo real, analítica predictiva y toma de decisiones prescriptiva. Creamos un CFO Digital copiloto para que tu PyME esté a la vanguardia.',
     menuOpen:'Abrir menú', menuClose:'Cerrar menú',
     days:' días', ofSales:'% de ventas',
     src:[['Tango Gestión','ventas y stock'],['Banco Galicia · Santander','extractos'],['Mercado Pago','cobros online'],['AFIP / ARCA','comprobantes'],['flujo_caja_v7_FINAL.xlsx','¿cuál es la última?']],
@@ -890,8 +891,8 @@ var DYN={
     ]
   },
   en:{
-    locale:'en-US', title:'Franco Barra · CFO Digital | Strategic Business, Finance & Data',
-    desc:'Strategy, FP&A and automation for executives: Power BI, scenario analysis and fractional CFO services for fast-growing companies. Franco Barra, CPA.',
+    locale:'en-US', title:'Digital CFO & Power BI for Small Businesses | Franco Barra',
+    desc:'We combine traditional financial expertise with real-time dashboards, predictive analytics, and prescriptive decision-making. Your Digital CFO copilot helps your small business stay ahead.',
     menuOpen:'Open menu', menuClose:'Close menu',
     days:' days', ofSales:'% of sales',
     src:[['Tango Gestión','sales & inventory'],['Banco Galicia · Santander','bank statements'],['Mercado Pago','online payments'],['AFIP / ARCA','tax invoices'],['cash_flow_v7_FINAL.xlsx','which one is the latest?']],
@@ -943,7 +944,9 @@ function applyStatic(){
   $$('[data-i18n-attr]').forEach(function(e){e.dataset.i18nAttr.split(';').forEach(function(pair){var p=pair.split(':'),v=lang==='en'?STATIC_EN[p[1]]:ATTR_ES[p[1]];if(v!=null)e.setAttribute(p[0],v)})});
   document.documentElement.lang=lang==='en'?'en':'es-AR';
   document.title=T().title;
+  var ogt=$('meta[property="og:title"]');if(ogt)ogt.setAttribute('content',T().title);
   var md=$('meta[name="description"]');if(md)md.setAttribute('content',T().desc);
+  var ogd=$('meta[property="og:description"]');if(ogd)ogd.setAttribute('content',T().desc);
   $$('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===lang)});
 }
 
